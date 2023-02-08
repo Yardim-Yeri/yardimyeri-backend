@@ -43,12 +43,12 @@
             <table class="table table-striped table-hover table-bordered" id="datatable" style="table-layout: fixed">
                 <thead>
                     <tr>
-                        <th width="100" scope="col">İSİM</th>
-                        <th width="160" scope="col">SANA OLAN UZAKLIK</th>
+                        <th width="140" scope="col">İSİM</th>
+                        <th width="180" scope="col">SANA OLAN UZAKLIK</th>
                         <th width="160" scope="col">ŞEHİR</th>
                         <th width="120" scope="col">İHTİYAÇ TÜRÜ</th>
                         <th width="110" scope="col">KAÇ KİŞİLİK</th>
-                        <th width="200" scope="col">TALEP TARİHİ</th>
+                        <th width="130" scope="col">TALEP TARİHİ</th>
                         <th width="150" scope="col">DURUMU</th>
                         <th width="100" scope="col">İŞLEMLER</th>
                     </tr>
