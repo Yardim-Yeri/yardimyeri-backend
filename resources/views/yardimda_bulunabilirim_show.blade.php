@@ -63,8 +63,10 @@
                 <input type="hidden" id="set_location" value="{{ $item->lat . ',' . $item->lng }}">
 
                 @if ($item->help_status != 'Yardım Ulaştı')
-                    <button data-bs-toggle="modal" data-bs-target="#startHelpModal"
-                        class="remove-started btn btn-lg mt-4 btn-success w-100">YARDIM ET</button>
+                    <div class="mt-4">
+                        <div class="fs-6 text-danger mb-2">Yardıma gidiyorsan veya yardım ettiysen aşağıdaki buton aracılığı ile bize bildir. <br/> Yardıma ihtiyacı olanlara doğru veriyi aktarabilmemiz için gerekli</div>
+                        <button data-bs-toggle="modal" data-bs-target="#startHelpModal" class="remove-started btn btn-lg btn-success w-100">YARDIM ET</button>
+                    </div>
                 @endif
 
                 <div class="show-started" style="display: none">
