@@ -24,7 +24,11 @@
                         <tr>
                             <th>{{ $item->name }}</th>
                             <th class="coordinates">
+                                @if(!empty($item->lat) && !empty($item->lng))
                                 <span class="d-none">{{ $item->lat . ',' . $item->lng }}</span>
+                                @else
+                                <span>Konum girilmemiş</span>
+                                @endif
                             </th>
                             <th>
                                 {{ $item->ihtiyac_turu }}

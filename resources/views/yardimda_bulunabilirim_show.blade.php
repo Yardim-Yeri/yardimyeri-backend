@@ -38,12 +38,12 @@
                         <tr>
                             <td>ADRES</td>
                             <td class="text-center">:</td>
-                            <td>{{ $item->sehir }}</td>
+                            <td>{{ $item->adres }}</td>
                         </tr>
                         <tr>
                             <td>ADRES TARİFİ</td>
                             <td class="text-center">:</td>
-                            <td>{{ $item->ihtiyac_turu }}</td>
+                            <td>{{ $item->adres_tarifi ?? 'Boş' }}</td>
                         </tr>
                         <tr>
                             <td>YARDIM DURUMU</td>
@@ -53,7 +53,9 @@
                     </table>
                 </div>
 
-                <div id="map" style="height: 300px"></div>
+                @if(!empty($item->lat) && !empty($item->lng))
+                    <div id="map" style="height: 300px"></div>
+                @endif
 
                 <input type="hidden" id="set_location" value="{{ $item->lat . ',' . $item->lng }}">
 
