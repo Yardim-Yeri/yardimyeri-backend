@@ -60,7 +60,7 @@
                                 @if (!empty($item->lat) && !empty($item->lng))
                                     <span class="d-none">{{ $item->lat . ',' . $item->lng }}</span>
                                 @else
-                                    <span>Konum girilmemiş</span>
+                                    <span>Konum bilgisi alınamadı</span>
                                 @endif
                             </th>
                             <th>

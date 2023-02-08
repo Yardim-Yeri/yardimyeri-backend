@@ -53,8 +53,11 @@
                     </table>
                 </div>
 
-                @if(!empty($item->lat) && !empty($item->lng))
-                    <div id="map" style="height: 300px"></div>
+                @if (!empty($item->lat) && !empty($item->lng))
+                    <div>
+                        <span class="fs-6 d-block mb-2">Talebin gönderildiği konum bilgisi</span>
+                        <div id="map" style="height: 300px"></div>
+                    </div>
                 @endif
 
                 <input type="hidden" id="set_location" value="{{ $item->lat . ',' . $item->lng }}">
@@ -106,6 +109,13 @@
                                     <input type="text" class="form-control" id="name" name="name"
                                         placeholder="İsim">
                                     <label for="name" class="form-label">İsim</label>
+                                </div>
+                                <div class="mb-3 form-floating">
+                                    <input type="email" class="form-control" id="email" name="email"
+                                        placeholder="E-Posta Adresiniz">
+                                    <label for="email" class="form-label">E-Posta Adresiniz</label>
+                                    <div class="form-text">Bu alan zorunlu değildir. Ancak e-posta adresinizi girdiğiniz
+                                        takdirde yeni oluşan talepleri mail olarak sizlere bildiriyoruz.</div>
                                 </div>
                                 <div class="mb-3 form-floating">
                                     <input type="text" class="form-control" id="tel" name="tel"

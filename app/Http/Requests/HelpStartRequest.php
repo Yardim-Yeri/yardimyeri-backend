@@ -30,6 +30,7 @@ class HelpStartRequest extends FormRequest
         if ($this->status == 'Yardım Geliyor') {
             $rules['name'] = 'required';
             $rules['tel'] = 'required';
+            $rules['email'] = 'nullable|email';
         }
 
         return $rules;

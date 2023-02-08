@@ -312,6 +312,7 @@ function startHelp() {
     var button = document.querySelector(".start-help");
     var name = document.querySelector("#name");
     var tel = document.querySelector("#tel");
+    var email = document.querySelector("#email");
 
     if (!button) {
         return false;
@@ -330,7 +331,7 @@ function startHelp() {
             },
             method: "POST",
             credentials: "same-origin",
-            body: JSON.stringify({ name: name.value, tel: tel.value, status: 'Yardım Geliyor' }),
+            body: JSON.stringify({ name: name.value, tel: tel.value, email: email.value, status: 'Yardım Geliyor' }),
         })
             .then((res) => res.json())
             .then((res) => {

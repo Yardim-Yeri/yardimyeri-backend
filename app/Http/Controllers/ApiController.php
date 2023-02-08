@@ -70,6 +70,7 @@ class ApiController extends Controller
             $helper = new HelperData();
             $helper->name = $request->input('name');
             $helper->tel = $request->input('tel');
+            $helper->email = $request->input('email');
             $helper->help_data_id = $item->id;
             $helper->save();
         } elseif ($status == 'Yardım Ulaştı') {
