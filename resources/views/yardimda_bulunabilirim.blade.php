@@ -30,7 +30,7 @@
             <div class="col-md-4 mt-3">
                 <div class="card bg-info mx-sm-1 p-3">
                     <div class="text-white text-center mt-3">
-                        <h4>Gönderimde Olan Yardım Sayısı</h4>
+                        <h4>Ulaştırılmakta Olan Yardım Sayısı</h4>
                     </div>
                     <div class="text-white text-center mt-2">
                         <h1>{{ $info_count }}</h1>
