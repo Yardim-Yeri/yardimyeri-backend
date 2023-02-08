@@ -44,7 +44,7 @@
                 <thead>
                     <tr>
                         <th width="100" scope="col">İSİM</th>
-                        <th width="100" scope="col">UZAKLIK</th>
+                        <th width="150" scope="col">UZAKLIK</th>
                         <th width="120" scope="col">İHTİYAÇ TÜRÜ</th>
                         <th width="110" scope="col">KAÇ KİŞİLİK</th>
                         <th width="200" scope="col">TALEP TARİHİ</th>
@@ -60,7 +60,7 @@
                                 @if (!empty($item->lat) && !empty($item->lng))
                                     <span class="d-none">{{ $item->lat . ',' . $item->lng }}</span>
                                 @else
-                                    <span>Konum bilgisi alınamadı</span>
+                                    <span>{{ $item->sehir }}</span>
                                 @endif
                             </th>
                             <th>
