@@ -58,9 +58,9 @@
                         <span class="fs-6 d-block mb-2">Talebin gönderildiği konum bilgisi</span>
                         <div id="map" style="height: 300px"></div>
                     </div>
+                    <input type="hidden" id="set_location" value="{{ $item->lat . ',' . $item->lng }}">
                 @endif
 
-                <input type="hidden" id="set_location" value="{{ $item->lat . ',' . $item->lng }}">
 
                 @if ($item->help_status != 'Yardım Ulaştı')
                     <div class="mt-4">
