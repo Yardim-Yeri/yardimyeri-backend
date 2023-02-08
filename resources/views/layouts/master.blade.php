@@ -28,7 +28,7 @@
 
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom">
-            <div class="container">
+            <div class="container position-relative">
                 <a class="navbar-brand w-100 text-center m-0" href="/">YARDIMYERİ.COM</a>
             </div>
         </nav>
@@ -40,7 +40,8 @@
 
     <footer>
         <div class="copyright text-center border-top mt-5 py-4">
-            © 2023 YARDIMYERİ.COM
+            <span class="d-inline-block">Geri Bildirim: </span><a href="mailto:yardimyeri.info@gmail.com" target="_blank" class="d-inline-block">Mail Gönder</a>
+            <span class="ms-4">© 2023 YARDIMYERİ.COM</span>
         </div>
     </footer>
 
