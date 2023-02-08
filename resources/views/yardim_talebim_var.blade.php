@@ -173,8 +173,8 @@
 
                     <div class="mb-3 form-floating">
                         <input type="text" class="form-control" id="apartman" name="apartman"
-                            placeholder="Apartman">
-                        <label for="apartman" class="form-label">Apartman</label>
+                            placeholder="Apartman (Zorunlu Değil)">
+                        <label for="apartman" class="form-label">Apartman (Zorunlu Değil)</label>
                     </div>
 
                     <div class="mb-3 form-floating">
