@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\HelpData;
 use App\Models\HelperData;
-use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
@@ -19,9 +18,14 @@ class PageController extends Controller
             return $this->yardimdaBulunabilirimShow($id);
         }
 
-        $data = HelpData::where('help_status', '!=', 'Yardım Ulaştı')->get();
+        $all_data = HelpData::all();
 
-        return view('yardimda_bulunabilirim', compact('data'));
+        $success_count = $all_data->where('help_status', 'Yardım Ulaştı')->count();
+        $warning_count = $all_data->where('help_status', 'Yardım Bekliyor')->count();
+        $info_count = $all_data->where('help_status', 'Yardım Geliyor')->count();
+        $data = $all_data->where('help_status', '!=', 'Yardım Ulaştı');
+
+        return view('yardimda_bulunabilirim', compact('data', 'success_count', 'warning_count', 'info_count'));
     }
 
     public function yardimdaBulunabilirimShow($id)

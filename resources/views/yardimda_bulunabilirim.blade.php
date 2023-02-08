@@ -6,6 +6,39 @@
             <h1 class="h2">YARDIMA İHTİYACI OLANLAR</h1>
         </div>
 
+        <div class="row">
+            <div class="col-md-4 mt-3">
+                <div class="card bg-success mx-sm-1 p-3">
+                    <div class="text-white text-center mt-3">
+                        <h4>Ulaştırılan Yardım Sayısı</h4>
+                    </div>
+                    <div class="text-white text-center mt-2">
+                        <h1>{{ $success_count }}</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mt-3">
+                <div class="card bg-warning mx-sm-1 p-3">
+                    <div class="text-dark text-center mt-3">
+                        <h4>Bekleyen Yardım Sayısı</h4>
+                    </div>
+                    <div class="text-dark text-center mt-2">
+                        <h1>{{ $warning_count }}</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mt-3">
+                <div class="card bg-info mx-sm-1 p-3">
+                    <div class="text-white text-center mt-3">
+                        <h4>Gönderimde Olan Yardım Sayısı</h4>
+                    </div>
+                    <div class="text-white text-center mt-2">
+                        <h1>{{ $info_count }}</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="mt-4 table-responsive">
             <table class="table table-striped table-hover table-bordered" id="datatable" style="table-layout: fixed">
                 <thead>
@@ -24,10 +57,10 @@
                         <tr>
                             <th>{{ $item->name }}</th>
                             <th class="coordinates">
-                                @if(!empty($item->lat) && !empty($item->lng))
-                                <span class="d-none">{{ $item->lat . ',' . $item->lng }}</span>
+                                @if (!empty($item->lat) && !empty($item->lng))
+                                    <span class="d-none">{{ $item->lat . ',' . $item->lng }}</span>
                                 @else
-                                <span>Konum girilmemiş</span>
+                                    <span>Konum girilmemiş</span>
                                 @endif
                             </th>
                             <th>
