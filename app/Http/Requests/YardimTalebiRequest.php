@@ -30,7 +30,6 @@ class YardimTalebiRequest extends FormRequest
             'sehir' => 'required',
             'ilce' => 'required',
             'mahalle' => 'required',
-            'apartman' => 'required',
         ];
     }
 }
