@@ -44,7 +44,8 @@
                 <thead>
                     <tr>
                         <th width="100" scope="col">İSİM</th>
-                        <th width="150" scope="col">UZAKLIK</th>
+                        <th width="160" scope="col">SANA OLAN UZAKLIK</th>
+                        <th width="160" scope="col">ŞEHİR</th>
                         <th width="120" scope="col">İHTİYAÇ TÜRÜ</th>
                         <th width="110" scope="col">KAÇ KİŞİLİK</th>
                         <th width="200" scope="col">TALEP TARİHİ</th>
@@ -60,25 +61,28 @@
                                 @if (!empty($item->lat) && !empty($item->lng))
                                     <span class="d-none">{{ $item->lat . ',' . $item->lng }}</span>
                                 @else
-                                    <span>{{ $item->sehir }}</span>
+                                    <span>-</span>
                                 @endif
                             </th>
-                            <th>
+                            <td>
+                                {{ $item->sehir }}
+                            </td>
+                            <td>
                                 {{ $item->ihtiyac_turu }}
-                            </th>
-                            <th>
+                            </td>
+                            <td>
                                 {{ $item->kac_kisilik }} Kişilik
-                            </th>
-                            <th>
+                            </td>
+                            <td>
                                 {{ $item->created_at->format('d.m.Y H:i') }}
-                            </th>
-                            <th>
+                            </td>
+                            <td>
                                 <span class="btn btn-warning">{{ $item->help_status }}</span>
-                            </th>
-                            <th>
+                            </td>
+                            <td>
                                 <a href="{{ route('yardimda-bulunabilirim', ['id' => $item->id]) }}"
                                     class="btn btn-primary">Detaylar</a>
-                            </th>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

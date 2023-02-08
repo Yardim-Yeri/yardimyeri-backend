@@ -15,11 +15,13 @@
                             <td class="text-center">:</td>
                             <td>{{ $item->name }}</td>
                         </tr>
+                        @if($helpers->isNotEmpty())
                         <tr>
                             <td>TELEFON NUMARASI</td>
                             <td class="text-center">:</td>
                             <td>{{ $item->tel }}</td>
                         </tr>
+                        @endif
                         <tr>
                             <td>İHTİYAÇ TÜRÜ</td>
                             <td class="text-center">:</td>
@@ -106,7 +108,7 @@
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <p>Aşağıda bulunan bilgileri doldurduktan sonra yardımı başlatabilirsiniz.</p>
+                                <p>Aşağıda bulunan bilgileri doldurduktan sonra yardımı başlatabilirsiniz. <span class="text-danger">Yardımı başlattığınız takdirde yardım talep edenin iletişim bilgilerine ulaşabilirsiniz.</span></p>
                                 <div class="mb-3 form-floating">
                                     <input type="text" class="form-control" id="name" name="name"
                                         placeholder="İsim">
