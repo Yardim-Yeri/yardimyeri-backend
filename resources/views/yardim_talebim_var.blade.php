@@ -143,6 +143,7 @@
                         <label for="kac_kisilik" class="form-label">Kaç Kişinin İhtiyacı Var?</label>
                     </div>
 
+                    <button id="get_location" class="btn btn-link p-0 w-100 text-end mb-2" type="button">Konum bilgimi getir</button>
                     <div id="map" style="height: 180px"></div>
                     <div class="form-text text-danger mb-3">Konum izni verdiğiniz takdirde, alt tarafta bulunan seçenekler konum bilginize göre otomatik olarak çekilecektir. <br> Lütfen verinin doğrulunu kontrol edin.</div>
 

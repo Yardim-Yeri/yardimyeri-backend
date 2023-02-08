@@ -23,6 +23,12 @@ function init() {
             attribution:
                 '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
         }).addTo(map);
+
+        var get_location_button = document.querySelector('#get_location');
+
+        if (get_location_button) {
+            get_location_button.addEventListener('click', getLocation);
+        }
     }
 
     var set_location = document.querySelector("#set_location");
@@ -420,6 +426,10 @@ function locationProcess(lat, lng) {
 function helpFinished() {
     var button = document.querySelector("#help-finished");
 
+    if (!button) {
+        return false;
+    }
+
     button.addEventListener("click", function () {
         var api_url = this.getAttribute("data-url");
 
@@ -458,6 +468,10 @@ function helpFinished() {
 
 function helpCancel() {
     var button = document.querySelector("#help-cancel");
+
+    if (!button) {
+        return false;
+    }
 
     button.addEventListener("click", function () {
         var api_url = this.getAttribute("data-url");
