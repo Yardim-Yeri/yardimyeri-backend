@@ -77,7 +77,11 @@
                                 {{ $item->created_at->format('d.m.Y H:i') }}
                             </td>
                             <td>
+                                @if ($item->help_status == "Yardım Geliyor")
+                                <span class="btn btn-info">{{ $item->help_status }}</span>
+                                @else
                                 <span class="btn btn-warning">{{ $item->help_status }}</span>
+                                @endif
                             </td>
                             <td>
                                 <a href="{{ route('yardimda-bulunabilirim', ['id' => $item->id]) }}"

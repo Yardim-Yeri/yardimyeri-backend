@@ -50,7 +50,13 @@
                         <tr>
                             <td>YARDIM DURUMU</td>
                             <td class="text-center">:</td>
-                            <td><span class="badge p-2 bg-warning">{{ $item->help_status }}</span></td>
+                            <td>
+                                @if ($item->help_status == "Yardım Geliyor")
+                                <span class="badge p-2 bg-info">{{ $item->help_status }}</span>
+                                @else
+                                <span class="badge p-2 bg-warning">{{ $item->help_status }}</span>
+                                @endif
+                            </td>
                         </tr>
                     </table>
                 </div>
