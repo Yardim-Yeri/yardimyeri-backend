@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\HelpData;
 use App\Models\HelperData;
+use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
@@ -12,8 +13,11 @@ class PageController extends Controller
         return view('yardim_talebim_var');
     }
 
-    public function yardimdaBulunabilirim($id = null)
+    public function yardimdaBulunabilirim(Request $request, $id = null)
     {
+
+        
+
         if (!empty($id)) {
             return $this->yardimdaBulunabilirimShow($id);
         }
@@ -24,6 +28,11 @@ class PageController extends Controller
         $warning_count = $all_data->where('help_status', 'Yardım Bekliyor')->count();
         $info_count = $all_data->where('help_status', 'Yardım Geliyor')->count();
         $data = $all_data->where('help_status', '!=', 'Yardım Ulaştı');
+
+        if($request->has('old_page'))
+        {
+            return view('yardimda-bulunabilirim-old' , compact('data', 'success_count', 'warning_count', 'info_count'));
+        }
 
         return view('yardimda_bulunabilirim', compact('data', 'success_count', 'warning_count', 'info_count'));
     }
