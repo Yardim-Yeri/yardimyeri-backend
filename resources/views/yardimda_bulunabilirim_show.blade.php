@@ -80,9 +80,9 @@
                 <div class="show-started" style="display: none">
                     <div class="d-flex gap-3">
                         <button id="help-cancel" data-url="{{ route('api-change-help-status', ['id' => $item->id]) }}"
-                            class="btn btn-lg mt-4 btn-danger w-100">YARDIMI İPTAL ET</button>
+                            class="btn btn-lg mt-4 btn-danger w-100">YARDIMA GİDEMEDİM İPTAL ET</button>
                         <button id="help-finished" data-url="{{ route('api-change-help-status', ['id' => $item->id]) }}"
-                            class="btn btn-lg mt-4 btn-success w-100">YARDIMI TAMAMLA</button>
+                            class="btn btn-lg mt-4 btn-success w-100">YARDIMI ULAŞTIRDIM</button>
                     </div>
                 </div>
 
