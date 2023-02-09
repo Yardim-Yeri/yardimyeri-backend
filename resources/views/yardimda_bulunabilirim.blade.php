@@ -39,58 +39,102 @@
             </div>
         </div>
 
-        <div class="mt-4 table-responsive">
-            <table class="table table-striped table-hover table-bordered" id="datatable" style="table-layout: fixed">
-                <thead>
-                    <tr>
-                        <th width="140" scope="col">İSİM</th>
-                        <th width="180" scope="col">SANA OLAN UZAKLIK</th>
-                        <th width="160" scope="col">ŞEHİR</th>
-                        <th width="120" scope="col">İHTİYAÇ TÜRÜ</th>
-                        <th width="110" scope="col">KAÇ KİŞİLİK</th>
-                        <th width="130" scope="col">TALEP TARİHİ</th>
-                        <th width="150" scope="col">DURUMU</th>
-                        <th width="100" scope="col">İŞLEMLER</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($data as $item)
-                        <tr>
-                            <th>{{ $item->name }}</th>
-                            <th class="coordinates">
-                                @if (!empty($item->lat) && !empty($item->lng))
-                                    <span class="d-none">{{ $item->lat . ',' . $item->lng }}</span>
-                                @else
-                                    <span>-</span>
-                                @endif
-                            </th>
-                            <td>
-                                {{ $item->sehir }}
-                            </td>
-                            <td>
-                                {{ $item->ihtiyac_turu }}
-                            </td>
-                            <td>
-                                {{ $item->kac_kisilik }} Kişilik
-                            </td>
-                            <td>
-                                {{ $item->created_at->format('d.m.Y H:i') }}
-                            </td>
-                            <td>
-                                @if ($item->help_status == "Yardım Geliyor")
-                                <span class="btn btn-info">{{ $item->help_status }}</span>
-                                @else
-                                <span class="btn btn-warning">{{ $item->help_status }}</span>
-                                @endif
-                            </td>
-                            <td>
-                                <a href="{{ route('yardimda-bulunabilirim', ['id' => $item->id]) }}"
-                                    class="btn btn-primary">Detaylar</a>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+        <div class="mt-4">
+        @foreach ($data as $item)
+            <div class="card shadow my-1">
+                <div class="card-body">
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col">
+                                    <label><b>İSİM</b></label>
+                                    <p class="text-truncate"> {{ $item->name }}</p>
+                                    <hr>
+                                </div>
+                               
+                                <div class="col">
+                                    <label><b>ŞEHİR</b></label>
+                                    <p>{{ $item->sehir }}</p>
+                                    <hr>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col">
+                                    <label><b>SANA OLAN UZAKLIK</b></label>
+                                    <p  class="coordinates" >
+                                        @if (!empty($item->lat) && !empty($item->lng))
+                                            <span class="d-none">{{ $item->lat . ',' . $item->lng }}</span>
+                                        @else
+                                            <span>-</span>
+                                        @endif    
+                                    </p>
+                                    <hr>
+                                </div>
+                               
+                                <div class="col">
+                                    <label><b>İHTİYAÇ TÜRÜ</b></label>
+                                    <p>{{ $item->ihtiyac_turu }}</p>
+                                    <hr>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                      
+
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col">
+                                    <label><b>KAÇ KİŞİLİK</b></label>
+                                    <p>{{ $item->kac_kisilik }}</p>
+                                    <hr>
+                                </div>
+                               
+                                <div class="col">
+                                    <label><b>TALEP TARİHİ</b></label>
+                                    <p>{{ $item->created_at->format('d-m-Y H:i') }}</p>
+                                    <hr>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-6">
+                                    <label><b>İHTİYAÇ DETAY</b></label>
+                                    <p class="text-truncate">{{ $item->ihtiyac_turu_detayi }}</p>
+                                    <hr>
+                                </div>
+                                <div class="col-6">
+                                    <label><b>DURUMU</b></label>
+                                    <p>
+                                       <span class="badge {{ $item->help_status=="Yardım Geliyor" ? 'bg-info' : 'bg-warning' }}">
+                                       {{ $item->help_status }}
+                                       </span>
+                                    </p>
+                                    <hr>
+                                </div>
+                            </div>
+                        </div>
+
+                       
+
+                        <div class="col-md-3 mx-auto">
+                                <a href="{{ route('yardimda-bulunabilirim', ['id' => $item->id]) }}" class="btn btn-primary col-12">Detaylar</a>
+                             
+                        </div>
+                        
+                    </div>  
+                </div>
+            </div>
+        @endforeach
         </div>
+        
+
     </div>
 @endsection
