@@ -119,6 +119,11 @@ class BulkUsefulLinksCommand extends Command
                 "url" => "enkazbildirim.org",
                 "description" => "Türkiye'nin güncel enkaz haritasını gösteren site"
             ],
+            [
+                "title" => "Afad Acil Çağrı",
+                "url" => "https://play.google.com/store/apps/details?id=tr.gov.icisleri.afad",
+                "description" => "T.C. İçişleri Bakanlığı Afet ve Acil Durum Yönetimi Başkanlığı Acil Çağrı mobil uygulaması. Toplanma alanlarını görüntüleyebilir ve afet durumunda acil çağrı başlatabilirsiniz."
+            ]
             ];
 
         foreach ($data as $item) {
