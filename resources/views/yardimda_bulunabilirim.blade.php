@@ -45,7 +45,7 @@
                     <div class="card-body">
                         <div class="row">
 
-                            <div class="col-6 col-lg-3 col-xl">
+                            <div class="col-6 col-lg-3 col-xl-1">
                                 <b>İSİM</b>
                                 <p class="text-truncate"> {{ $item->name }}</p>
                                 <hr class="d-md-none">
@@ -87,7 +87,7 @@
                                 <hr class="d-md-none">
                             </div>
 
-                            <div class="col-6 col-lg-3 col-xl">
+                            <div class="col-6 d-md-none">
                                 <b>İHTİYAÇ DETAY</b>
                                 <p class="text-truncate">{{ $item->ihtiyac_turu_detayi }}</p>
                                 <hr class="d-md-none">
