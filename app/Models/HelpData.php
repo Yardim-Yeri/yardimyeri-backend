@@ -25,4 +25,8 @@ class HelpData extends Model
         
         return $sehir . ' ' . $ilce->ilce_title . ' İlçesi ' . ($mahalle->mahalle_title ?? '') . ' Mah. ' . ($sokak->sokak_cadde_title ?? '') . ' ' . ($this->apartman ?? '');
     }
+
+    public function helper(){
+        return $this->hasOne(HelperData::class);
+    }
 }

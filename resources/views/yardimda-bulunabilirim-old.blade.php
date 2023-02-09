@@ -50,7 +50,7 @@
                         <th scope="col">KAÇ KİŞİLİK</th>
                         <th scope="col">TALEP TARİHİ</th>
                         <th scope="col">TELEFON</th>
-                        <th  scope="col">ADRES</th>
+                        <th scope="col">ADRES</th>
                         <th scope="col">DURUMU</th>
                         <th scope="col">İŞLEMLER</th>
                     </tr>

@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\DemandController;
+use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\Pages\UsefulLinksController;
@@ -16,7 +19,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/yardim-talebim-var', [PageController::class, 'yardimTalebimVar'])->name('yardim-talebim-var');
 Route::get('/yardimda-bulunabilirim/{id?}', [PageController::class, 'yardimdaBulunabilirim'])->name('yardimda-bulunabilirim');
 Route::get('yararli-linkler', [UsefulLinksController::class, 'index'])->name('yararli-linkler');
+
+Route::get('login',[AuthController::class,'index'])->name('get.login');
+Route::post('login',[AuthController::class,'login'])->name('post.login');
+Route::get('logout',[AuthController::class,'logout'])->name('logout');
+
+Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
+    Route::get('demands',[DemandController::class,'index'])->name('get.admin-demands');
+    Route::get('demands/{id}',[DemandController::class,'show'])->name('show.admin-demand');
+    Route::post('demands/{id}',[DemandController::class,'update'])->name('update.admin-demand');
+    Route::get('users',[UsersController::class,'index'])->name('get.admin-users');
+    Route::post('users',[AuthController::class,'register'])->name('store.admin-users');
+    Route::get('users/delete/{id}',[UsersController::class,'delete'])->name('delete.admin-users');
+});
