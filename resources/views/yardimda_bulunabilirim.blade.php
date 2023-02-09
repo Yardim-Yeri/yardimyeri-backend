@@ -52,9 +52,9 @@
         </div>
 
         <div class="d-flex flex-row w-100 toolbox justify-content-between align-items-center my-4">
-            <a target="_blank" class="btn btn-primary" href="{{ route('api.export-spreadsheet')  }}">
+            {{-- <a target="_blank" class="btn btn-primary" href="{{ route('api.export-spreadsheet')  }}">
                 Excel Indir
-            </a>
+            </a> --}}
 
             {{ $data->onEachSide(5)->links() }}
         </div>
@@ -136,9 +136,9 @@
         </div>
 
         <div class="d-flex flex-row w-100 toolbox justify-content-between align-items-center my-4">
-            <a target="_blank" class="btn btn-primary" href="{{ route('api.export-spreadsheet')  }}">
+            {{-- <a target="_blank" class="btn btn-primary" href="{{ route('api.export-spreadsheet')  }}">
                 Excel Indir
-            </a>
+            </a> --}}
 
             {{ $data->onEachSide(5)->links() }}
         </div>
