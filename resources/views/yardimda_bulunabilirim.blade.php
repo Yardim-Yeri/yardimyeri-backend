@@ -1,5 +1,17 @@
 @extends('layouts.master')
 
+@section('styles')
+    <style>
+        .toolbox > nav {
+            display: inline-block;
+        }
+
+        .toolbox > nav > ul {
+            margin: 0;
+        }
+    </style>
+@endsection
+
 @section('content')
     <div class="container">
         <div class="text-center">
@@ -39,7 +51,15 @@
             </div>
         </div>
 
-        <div class="mt-4">
+        <div class="d-flex flex-row w-100 toolbox justify-content-between align-items-center my-4">
+            <a target="_blank" class="btn btn-primary" href="{{ route('api.export-spreadsheet')  }}">
+                Excel Indir
+            </a>
+
+            {{ $data->onEachSide(5)->links() }}
+        </div>
+
+        <div>
             @foreach ($data as $item)
                 <div class="card shadow my-1 mb-2">
                     <div class="card-body">
@@ -106,7 +126,7 @@
 
                             <div class="col-12 col-md mx-auto">
                                 <a href="{{ route('yardimda-bulunabilirim', ['id' => $item->id]) }}"
-                                    class="btn btn-primary col-12">Detaylar</a>
+                                   class="btn btn-primary col-12">Detaylar</a>
                             </div>
 
                         </div>
@@ -115,6 +135,13 @@
             @endforeach
         </div>
 
+        <div class="d-flex flex-row w-100 toolbox justify-content-between align-items-center my-4">
+            <a target="_blank" class="btn btn-primary" href="{{ route('api.export-spreadsheet')  }}">
+                Excel Indir
+            </a>
+
+            {{ $data->onEachSide(5)->links() }}
+        </div>
 
     </div>
 @endsection
