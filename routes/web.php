@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\Pages\UsefulLinksController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,3 +19,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/yardim-talebim-var', [PageController::class, 'yardimTalebimVar'])->name('yardim-talebim-var');
 Route::get('/yardimda-bulunabilirim/{id?}', [PageController::class, 'yardimdaBulunabilirim'])->name('yardimda-bulunabilirim');
+Route::get('yararli-linkler', [UsefulLinksController::class, 'index'])->name('yararli-linkler');
