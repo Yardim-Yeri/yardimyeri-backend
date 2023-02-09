@@ -43,16 +43,16 @@
             <table class="table table-striped table-hover table-bordered" id="datatable">
                 <thead>
                     <tr>
-                        <th width="140" scope="col">İSİM</th>
-                        <th width="180" scope="col">SANA OLAN UZAKLIK</th>
-                        <th width="160" scope="col">ŞEHİR</th>
-                        <th width="120" scope="col">İHTİYAÇ TÜRÜ</th>
-                        <th width="110" scope="col">KAÇ KİŞİLİK</th>
-                        <th width="130" scope="col">TALEP TARİHİ</th>
-                        <th width="130" scope="col">TELEFON</th>
-                        <th width="130" scope="col">ADRES</th>
-                        <th width="150" scope="col">DURUMU</th>
-                        <th width="100" scope="col">İŞLEMLER</th>
+                        <th scope="col">İSİM</th>
+                        <th scope="col">SANA OLAN UZAKLIK</th>
+                        <th scope="col">ŞEHİR</th>
+                        <th scope="col">İHTİYAÇ TÜRÜ</th>
+                        <th scope="col">KAÇ KİŞİLİK</th>
+                        <th scope="col">TALEP TARİHİ</th>
+                        <th scope="col">TELEFON</th>
+                        <th  scope="col">ADRES</th>
+                        <th scope="col">DURUMU</th>
+                        <th scope="col">İŞLEMLER</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -81,7 +81,7 @@
                             <td>
                                 {{ $item->tel }}
                             </td>
-                            <td>
+                            <td style="word-break: break-word;">
                                 {{ $item->adres_tarifi }}
                             </td>
                             <td>
