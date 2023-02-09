@@ -41,11 +41,11 @@
 
         <div class="mt-4">
             @foreach ($data as $item)
-                <div class="card shadow my-1">
+                <div class="card shadow my-1 mb-2">
                     <div class="card-body">
                         <div class="row">
 
-                            <div class="col-6 col-lg-3 col-xl-1">
+                            <div class="col-6 col-lg-3 col-xl-2">
                                 <b>İSİM</b>
                                 <p class="text-truncate"> {{ $item->name }}</p>
                                 <hr class="d-md-none">
