@@ -91,13 +91,13 @@
                     <table class="table">
                         <thead>
                             <th>İSİM</th>
-                            <th>TELEFON NUMARASI</th>
+                            {{-- <th>TELEFON NUMARASI</th> --}}
                         </thead>
                         <tbody>
                             @foreach ($helpers as $helper)
                                 <tr>
                                     <td>{{ $helper->name }}</td>
-                                    <td>{{ $helper->tel }}</td>
+                                    {{-- <td>{{ $helper->tel }}</td> --}}
                                 </tr>
                             @endforeach
                         </tbody>
