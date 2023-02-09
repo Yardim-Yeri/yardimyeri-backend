@@ -19,13 +19,12 @@ class HelpDataExport implements FromCollection, ShouldAutoSize, WithMapping
     {
         return [
             $row->name,
-            \DB::table('sehir')
-                ->select('sehir_title')
-                ->where('sehir_key', '=', $row->sehir)
-                ->first()
-                ->sehir_title,
+            $row->sehir,
             $row->ihtiyac_turu,
-            sprintf('%d kisilik', $row->kac_kisilik),
+            sprintf('%d Kişilik', $row->kac_kisilik),
+            $row->created_at->format('d-m-Y H:i'),
+            $row->tel,
+            $row->adres,
             $row->help_status,
             URL::route('yardimda-bulunabilirim', ['id' => $row->id]),
         ];
