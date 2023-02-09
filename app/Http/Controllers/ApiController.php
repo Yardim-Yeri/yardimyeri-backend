@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\HelpDataExport;
 use App\Http\Requests\HelpStartRequest;
 use App\Http\Requests\YardimTalebiRequest;
 use App\Models\HelpData;
 use App\Models\HelperData;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class ApiController extends Controller
 {
@@ -50,7 +53,7 @@ class ApiController extends Controller
         $help_data->sehir = $request->input('sehir');
         $help_data->ilce_id = $request->input('ilce');
         $help_data->mahalle_id = $request->input('mahalle');
-        $help_data->sokak_id = (int) $request->input('sokak');
+        $help_data->sokak_id = (int)$request->input('sokak');
         $help_data->apartman = $request->input('apartman');
         $help_data->adres_tarifi = $request->input('adres_tarifi');
         $help_data->lat = $request->input('lat');
@@ -83,5 +86,15 @@ class ApiController extends Controller
         $item->save();
 
         return response()->json(['success' => true, 'message' => $message, 'help_id' => $item->id]);
+    }
+
+    public function exportSpreadsheet(Request $request)
+    {
+        return Excel::download(
+            new HelpDataExport(),
+            sprintf('yardim_talepleri_%s.xlsx', strftime('%Y-%m-%d-%H-%M-%S')),
+            \Maatwebsite\Excel\Excel::CSV,
+            ['Content-Type' => 'text/csv']
+        );
     }
 }

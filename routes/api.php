@@ -22,3 +22,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/get-country-data', [ApiController::class, 'getCountryData']);
 Route::post('/send-yardim-talebi-form', [ApiController::class, 'sendYardimTalebiForm'])->name('api-send-yardim-talebi-form');
 Route::post('/change-help-status/{id}', [ApiController::class, 'changeHelpStatus'])->name('api-change-help-status');
+
+Route::get('/export/help', [ApiController::class, 'exportSpreadsheet'])->name('api.export-spreadsheet');

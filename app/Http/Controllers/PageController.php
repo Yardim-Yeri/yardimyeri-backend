@@ -22,12 +22,13 @@ class PageController extends Controller
             return $this->yardimdaBulunabilirimShow($id);
         }
 
-        $all_data = HelpData::orderBy('created_at', 'DESC')->get();
-
-        $success_count = $all_data->where('help_status', 'Yardım Ulaştı')->count();
-        $warning_count = $all_data->where('help_status', 'Yardım Bekliyor')->count();
-        $info_count = $all_data->where('help_status', 'Yardım Geliyor')->count();
-        $data = $all_data->where('help_status', '!=', 'Yardım Ulaştı');
+        $success_count = HelpData::where('help_status', '=', 'Yardım Ulaştı')->count();
+        $warning_count = HelpData::where('help_status', '=', 'Yardım Bekliyor')->count();
+        $info_count = HelpData::where('help_status', '=', 'Yardım Geliyor')->count();
+        $data = HelpData::where('help_status', '!=', 'Yardım Ulaştı')
+            ->orderBy('created_at', 'DESC')
+            ->paginate(50)
+            ->withQueryString();
 
         if($request->has('old_page'))
         {
