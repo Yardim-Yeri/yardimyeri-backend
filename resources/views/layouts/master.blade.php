@@ -34,6 +34,10 @@
         </nav>
     </header>
 
+    <div class="alert alert-warning text-center">
+        Bu bir sosyal sorumluluk projesidir. Bilgileriniz KVKK güvencesiyle saklanmaktadır.
+    </div>
+
     <main class="py-5">
         @yield('content')
     </main>
