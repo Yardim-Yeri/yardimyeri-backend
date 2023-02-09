@@ -28,10 +28,14 @@
 <body>
 
     <header>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom">
-            <div class="container position-relative">
-                <a class="navbar-brand w-100 text-center m-0" href="/">YARDIMYERİ.COM</a>
+        <nav class="navbar navbar-light bg-light p-2">
+            <a class="navbar-brand" href="/">YARDIMYERİ.COM</a>
+
+
+            <div class=" ">
+                <a class="navbar-brand" href="/yararli-linkler">Yararlı Linkler</a>
             </div>
+          </nav>
         </nav>
     </header>
 
