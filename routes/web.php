@@ -30,6 +30,9 @@ Route::post('login',[AuthController::class,'login'])->name('post.login');
 Route::get('logout',[AuthController::class,'logout'])->name('logout');
 
 Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
+    Route::get('',function(){
+        return redirect()->route('get.admin-demands');
+    });
     Route::get('demands',[DemandController::class,'index'])->name('get.admin-demands');
     Route::get('demands/{id}',[DemandController::class,'show'])->name('show.admin-demand');
     Route::post('demands/{id}',[DemandController::class,'update'])->name('update.admin-demand');
