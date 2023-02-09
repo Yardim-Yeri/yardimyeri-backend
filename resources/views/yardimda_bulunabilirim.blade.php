@@ -47,13 +47,13 @@
 
                         <div class="col-md-6">
                             <div class="row">
-                                <div class="col">
+                                <div class="col-6">
                                     <label><b>İSİM</b></label>
                                     <p class="text-truncate"> {{ $item->name }}</p>
                                     <hr>
                                 </div>
                                
-                                <div class="col">
+                                <div class="col-6">
                                     <label><b>ŞEHİR</b></label>
                                     <p>{{ $item->sehir }}</p>
                                     <hr>
@@ -63,7 +63,7 @@
 
                         <div class="col-md-6">
                             <div class="row">
-                                <div class="col">
+                                <div class="col-6">
                                     <label><b>SANA OLAN UZAKLIK</b></label>
                                     <p  class="coordinates" >
                                         @if (!empty($item->lat) && !empty($item->lng))
@@ -75,7 +75,7 @@
                                     <hr>
                                 </div>
                                
-                                <div class="col">
+                                <div class="col-6">
                                     <label><b>İHTİYAÇ TÜRÜ</b></label>
                                     <p>{{ $item->ihtiyac_turu }}</p>
                                     <hr>
@@ -89,13 +89,13 @@
 
                         <div class="col-md-6">
                             <div class="row">
-                                <div class="col">
+                                <div class="col-6">
                                     <label><b>KAÇ KİŞİLİK</b></label>
                                     <p>{{ $item->kac_kisilik }}</p>
                                     <hr>
                                 </div>
                                
-                                <div class="col">
+                                <div class="col-6">
                                     <label><b>TALEP TARİHİ</b></label>
                                     <p>{{ $item->created_at->format('d-m-Y H:i') }}</p>
                                     <hr>
