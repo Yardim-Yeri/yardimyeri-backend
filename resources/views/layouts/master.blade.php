@@ -30,11 +30,7 @@
     <header>
         <nav class="navbar navbar-light bg-light p-2">
             <a class="navbar-brand" href="/">YARDIMYERİ.COM</a>
-
-
-            <div class=" ">
-                <a class="navbar-brand" href="/yararli-linkler">Yararlı Linkler</a>
-            </div>
+            <a class="navbar-brand text-decoration-underline" href="/yararli-linkler">Yararlı Linkler</a>
           </nav>
         </nav>
     </header>
