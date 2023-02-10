@@ -11,7 +11,7 @@ import "sweetalert2/src/sweetalert2.scss";
 let map;
 
 const setMapMarkerAndIcon = (lat, lng) => {
-    Leaflet.Icon.Default.imagePath = '/';
+    Leaflet.Icon.Default.imagePath = "/";
 
     Leaflet.marker([lat, lng]).addTo(map);
 
@@ -77,6 +77,10 @@ function init() {
 
     helpFinished();
     helpCancel();
+
+    if (location.pathname == "/yardimda-bulunabilirim") {
+        filterInputs();
+    }
 }
 
 init();
@@ -520,5 +524,22 @@ function helpCancel() {
                     });
                 }
             });
+    });
+}
+
+function filterInputs() {
+    var inputs = document.querySelectorAll(".filter-input");
+
+    inputs.forEach((element) => {
+        element.addEventListener("change", function () {
+            var url = new URL(window.location.href);
+            url.searchParams.get(this.getAttribute("name"))
+                ? url.searchParams.set(this.getAttribute("name"), this.value)
+                : url.searchParams.append(
+                      this.getAttribute("name"),
+                      this.value
+                  );
+            window.location.href = url.href;
+        });
     });
 }

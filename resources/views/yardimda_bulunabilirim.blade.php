@@ -2,11 +2,11 @@
 
 @section('styles')
     <style>
-        .toolbox > nav {
+        .toolbox>nav {
             display: inline-block;
         }
 
-        .toolbox > nav > ul {
+        .toolbox>nav>ul {
             margin: 0;
         }
     </style>
@@ -51,12 +51,28 @@
             </div>
         </div>
 
-        <div class="d-flex flex-row w-100 toolbox justify-content-between align-items-center my-4">
+        <div class="d-flex flex-wrap flex-row w-100 toolbox align-items-center my-4">
             {{-- <a target="_blank" class="btn btn-primary" href="{{ route('api.export-spreadsheet')  }}">
                 Excel Indir
             </a> --}}
 
             {{ $data->onEachSide(5)->links() }}
+
+            <div class="col-12 col-md-6 mt-4 mt-md-0 d-flex align-items-center gap-3 ms-auto">
+                <span>Filtre:</span>
+                <select name="sehir" class="form-select filter-input">
+                    <option value="">Şehir</option>
+                    @foreach (config('cities.avaliable_cities') as $city)
+                        <option value="{{ $city }}" {{ request()->input('sehir') == $city ? 'selected' : '' }}>{{ $city }}</option>
+                    @endforeach
+                </select>
+                <select name="ihtiyac_turu" class="form-select filter-input">
+                    <option value="">İhtiyaç Türü</option>
+                    @foreach (config('needs') as $need)
+                        <option value="{{ $need }}" {{ request()->input('ihtiyac_turu') == $need ? 'selected' : '' }}>{{ $need }}</option>
+                    @endforeach
+                </select>
+            </div>
         </div>
 
         <div>
@@ -126,7 +142,7 @@
 
                             <div class="col-12 col-md mx-auto">
                                 <a href="{{ route('yardimda-bulunabilirim', ['id' => $item->id]) }}"
-                                   class="btn btn-primary col-12">Detaylar</a>
+                                    class="btn btn-primary col-12">Detaylar</a>
                             </div>
 
                         </div>

@@ -15,9 +15,6 @@ class PageController extends Controller
 
     public function yardimdaBulunabilirim(Request $request, $id = null)
     {
-
-        
-
         if (!empty($id)) {
             return $this->yardimdaBulunabilirimShow($id);
         }
@@ -26,13 +23,13 @@ class PageController extends Controller
         $warning_count = HelpData::where('help_status', '=', 'Yardım Bekliyor')->count();
         $info_count = HelpData::where('help_status', '=', 'Yardım Geliyor')->count();
         $data = HelpData::where('help_status', '!=', 'Yardım Ulaştı')
+            ->filter()
             ->orderBy('created_at', 'DESC')
-            ->paginate(50)
+            ->paginate(20)
             ->withQueryString();
 
-        if($request->has('old_page'))
-        {
-            return view('yardimda-bulunabilirim-old' , compact('data', 'success_count', 'warning_count', 'info_count'));
+        if ($request->has('old_page')) {
+            return view('yardimda-bulunabilirim-old', compact('data', 'success_count', 'warning_count', 'info_count'));
         }
 
         return view('yardimda_bulunabilirim', compact('data', 'success_count', 'warning_count', 'info_count'));
