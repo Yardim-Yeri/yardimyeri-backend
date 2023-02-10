@@ -23,10 +23,8 @@
                 <th scope="col">İSİM</th>
                 <th scope="col">ŞEHİR</th>
                 <th scope="col">İHTİYAÇ TÜRÜ</th>
-                <th scope="col">KAÇ KİŞİLİK</th>
                 <th scope="col">TALEP TARİHİ</th>
                 <th scope="col">TELEFON</th>
-                <th scope="col">ADRES</th>
                 <th scope="col">DURUMU</th>
                 <th scope="col">YARDIM EDEN</th>
                 <th scope="col">YARDIM EDEN TEL</th>
@@ -46,16 +44,10 @@
                         {{ $item->ihtiyac_turu }}
                     </td>
                     <td>
-                        {{ $item->kac_kisilik }} Kişilik
-                    </td>
-                    <td>
                         {{ $item->created_at->format('d.m.Y H:i') }}
                     </td>
                     <td>
                         {{ $item->tel }}
-                    </td>
-                    <td style="word-break: break-word;">
-                        {{ $item->adres_tarifi }}
                     </td>
                     <td>
                         {{ $item->help_status }}
