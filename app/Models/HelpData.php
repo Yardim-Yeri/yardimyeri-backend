@@ -9,6 +9,22 @@ class HelpData extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'tel',
+        'ihtiyac_turu',
+        'ihtiyac_turu_detayi',
+        'kac_kisilik',
+        'sehir',
+        'ilce_id',
+        'mahalle_id',
+        'sokak_id',
+        'apartman',
+        'adres_tarifi',
+        'lat',
+        'lng',
+    ];
+
     // relationship
     public function ilce()
     {

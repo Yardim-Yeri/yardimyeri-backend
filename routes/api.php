@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\HelpController;
 use App\Http\Controllers\API\HelperController;
 use App\Http\Controllers\ApiController;
 use Illuminate\Http\Request;
@@ -25,6 +26,8 @@ Route::group(['middleware' => ['client']], function () {
     Route::get('/provinces/{province}/districts/{district}/neighborhoods', [HelperController::class, 'getNeighborhoods']);
     Route::get('/provinces/{province}/districts', [HelperController::class, 'getDistricts']);
     Route::get('/provinces', [HelperController::class, 'getProvinces']);
+
+    Route::apiResource('help', HelpController::class);
 
     Route::get('/get-country-data', [ApiController::class, 'getCountryData']);
     Route::post('/send-yardim-talebi-form', [ApiController::class, 'sendYardimTalebiForm'])->name('api-send-yardim-talebi-form');
