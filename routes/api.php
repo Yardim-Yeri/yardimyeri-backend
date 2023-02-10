@@ -21,17 +21,15 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::group(['middleware' => ['client']], function () {
-    Route::get('/provinces/{province}/districts/{district}/neighborhoods/{neighborhood}/streets', [HelperController::class, 'getStreets']);
-    Route::get('/provinces/{province}/districts/{district}/neighborhoods', [HelperController::class, 'getNeighborhoods']);
-    Route::get('/provinces/{province}/districts', [HelperController::class, 'getDistricts']);
-    Route::get('/provinces', [HelperController::class, 'getProvinces']);
+Route::get('/provinces/{province}/districts/{district}/neighborhoods/{neighborhood}/streets', [HelperController::class, 'getStreets']);
+Route::get('/provinces/{province}/districts/{district}/neighborhoods', [HelperController::class, 'getNeighborhoods']);
+Route::get('/provinces/{province}/districts', [HelperController::class, 'getDistricts']);
+Route::get('/provinces', [HelperController::class, 'getProvinces']);
 
-    Route::apiResource('help', HelpController::class);
+Route::apiResource('help', HelpController::class);
 
-    Route::get('/get-country-data', [ApiController::class, 'getCountryData']);
-    Route::post('/send-yardim-talebi-form', [ApiController::class, 'sendYardimTalebiForm'])->name('api-send-yardim-talebi-form');
-    Route::post('/change-help-status/{id}', [ApiController::class, 'changeHelpStatus'])->name('api-change-help-status');
+Route::get('/get-country-data', [ApiController::class, 'getCountryData']);
+Route::post('/send-yardim-talebi-form', [ApiController::class, 'sendYardimTalebiForm'])->name('api-send-yardim-talebi-form');
+Route::post('/change-help-status/{id}', [ApiController::class, 'changeHelpStatus'])->name('api-change-help-status');
 
-    Route::get('/export/help', [ApiController::class, 'exportSpreadsheet'])->name('api.export-spreadsheet');
-});
+Route::get('/export/help', [ApiController::class, 'exportSpreadsheet'])->name('api.export-spreadsheet');
