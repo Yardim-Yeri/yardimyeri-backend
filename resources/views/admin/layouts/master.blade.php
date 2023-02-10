@@ -60,7 +60,7 @@
         </div>
     </footer>
 
-    @vite(['resources/js/app.js'])
+    @vite(['resources/js/admin.js'])
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     @yield('script')
     @stack('sc')

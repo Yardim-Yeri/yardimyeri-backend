@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DemandController;
+use App\Http\Controllers\Admin\LinkController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PageController;
@@ -39,4 +40,8 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
     Route::get('users',[UsersController::class,'index'])->name('get.admin-users');
     Route::post('users',[AuthController::class,'register'])->name('store.admin-users');
     Route::get('users/delete/{id}',[UsersController::class,'delete'])->name('delete.admin-users');
+    Route::get('useful-links',[LinkController::class,'index'])->name('get.useful-links');
+    Route::post('useful-links',[LinkController::class,'store'])->name('store.useful-links');
+    Route::post('useful-links/update/{id}',[LinkController::class,'update'])->name('update.useful-links');
+    Route::get('useful-links/delete/{id}',[LinkController::class,'delete'])->name('delete.useful-links');
 });
