@@ -11,6 +11,8 @@ import "sweetalert2/src/sweetalert2.scss";
 let map;
 
 const setMapMarkerAndIcon = (lat, lng) => {
+    Leaflet.Icon.Default.imagePath = '/';
+
     Leaflet.marker([lat, lng]).addTo(map);
 
     // Leaflet.icon({
