@@ -26,6 +26,8 @@ Route::get('/provinces/{province}/districts/{district}/neighborhoods', [HelperCo
 Route::get('/provinces/{province}/districts', [HelperController::class, 'getDistricts']);
 Route::get('/provinces', [HelperController::class, 'getProvinces']);
 
+Route::post('/send-helper-form/{help_data_id}', [HelperController::class, 'sendHelperForm']);
+
 Route::apiResource('help', HelpController::class);
 
 Route::get('/get-country-data', [ApiController::class, 'getCountryData']);
