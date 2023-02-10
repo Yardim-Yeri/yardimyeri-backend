@@ -25,7 +25,7 @@ class PageController extends Controller
         $data = HelpData::where('help_status', '!=', 'Yardım Ulaştı')
             ->filter()
             ->orderBy('created_at', 'DESC')
-            ->paginate(20)
+            ->paginate(50)
             ->withQueryString();
 
         if ($request->has('old_page')) {
