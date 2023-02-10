@@ -28,7 +28,7 @@
             </div>
             <div class="mb-3">
               <label>Şifre</label>
-              <input required type="password" class="form-control" name="pasword">
+              <input required type="password" class="form-control" name="password">
             </div>
           </div>
           <div class="modal-footer">
