@@ -14,7 +14,6 @@ class LinkController extends Controller
    }
 
    public function store(Request $request){
-    dd($request->all());
         $link = new UsefulLink();
         $link->title = $request->title;
         $link->url = $request->url;
