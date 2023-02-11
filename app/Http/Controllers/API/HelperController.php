@@ -37,7 +37,7 @@ class HelperController extends Controller
         );
     }
 
-    public function getNeighborhoods($province, $district)
+    public function getNeighborhoods($district)
     {
         $neighborhoods = Neighborhood::where('mahalle_ilcekey', $district)->paginate(25);
 
@@ -46,7 +46,7 @@ class HelperController extends Controller
         );
     }
 
-    public function getStreets($province, $district, $neighborhood)
+    public function getStreets($neighborhood)
     {
         $streets = Street::where('sokak_cadde_mahallekey', $neighborhood)->paginate(25);
 

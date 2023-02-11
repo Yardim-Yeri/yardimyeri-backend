@@ -21,9 +21,9 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::get('/provinces/{province}/districts/{district}/neighborhoods/{neighborhood}/streets', [HelperController::class, 'getStreets']);
-Route::get('/provinces/{province}/districts/{district}/neighborhoods', [HelperController::class, 'getNeighborhoods']);
-Route::get('/provinces/{province}/districts', [HelperController::class, 'getDistricts']);
+Route::get('/streets/{neighborhood}', [HelperController::class, 'getStreets']);
+Route::get('/neighborhoods/{district}', [HelperController::class, 'getNeighborhoods']);
+Route::get('/districts/{province}', [HelperController::class, 'getDistricts']);
 Route::get('/provinces', [HelperController::class, 'getProvinces']);
 
 Route::post('/send-help-form', [ApiController::class, 'sendHelpForm'])->name('api-send-yardim-talebi-form');
