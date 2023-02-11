@@ -27,7 +27,7 @@ class HelperController extends Controller
 
     public function getDistricts($province)
     {
-        $districts = District::where('ilce_sehirkey', 'like', $province)->paginate(25);
+        $districts = District::where('ilce_sehirkey', $province)->paginate(25);
 
         return $this->respondWithResourceCollection(
             DistrictResource::collection($districts)
@@ -36,7 +36,7 @@ class HelperController extends Controller
 
     public function getNeighborhoods($province, $district)
     {
-        $neighborhoods = Neighborhood::where('mahalle_ilcekey', 'like', $district)->paginate(25);
+        $neighborhoods = Neighborhood::where('mahalle_ilcekey', $district)->paginate(25);
 
         return $this->respondWithResourceCollection(
             NeighborhoodResource::collection($neighborhoods)
@@ -45,7 +45,7 @@ class HelperController extends Controller
 
     public function getStreets($province, $district, $neighborhood)
     {
-        $streets = Neighborhood::where('sokak_cadde_mahallekey', 'like', $neighborhood)->paginate(25);
+        $streets = Neighborhood::where('sokak_cadde_mahallekey', $neighborhood)->paginate(25);
 
         return $this->respondWithResourceCollection(
             StreetResource::collection($streets)
