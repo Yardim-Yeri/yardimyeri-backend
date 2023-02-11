@@ -57,18 +57,14 @@ class HelperController extends Controller
     public function sendHelperForm(Request $request, $help_data_id)
     {
         $help_data = HelpData::find($help_data_id);
-        if (!$help_data) {
+        if (empty($help_data)) {
             return $this->respondError('Yardım Talebi Mevcut Değil', 404);
-        }
-
-        if (!$request->has('name') || !$request->has('tel')) {
-            return $this->respondError('Lütfen Boş Alan Bırakmayın', 422);
         }
 
         try {
             $helper = new HelperData();
             $helper->name = $request->name;
-            $helper->tel = $request->tel;
+            $helper->tel = $request->phone_number;
             $helper->email = $request->email;
             $helper->help_data_id = $help_data->id;
             $helper->save();
