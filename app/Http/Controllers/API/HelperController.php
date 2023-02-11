@@ -12,6 +12,7 @@ use App\Models\HelpData;
 use App\Models\HelperData;
 use App\Models\Neighborhood;
 use App\Models\Province;
+use App\Models\Street;
 use Illuminate\Http\Request;
 
 class HelperController extends Controller
@@ -45,7 +46,7 @@ class HelperController extends Controller
 
     public function getStreets($province, $district, $neighborhood)
     {
-        $streets = Neighborhood::where('sokak_cadde_mahallekey', $neighborhood)->paginate(25);
+        $streets = Street::where('sokak_cadde_mahallekey', $neighborhood)->paginate(25);
 
         return $this->respondWithResourceCollection(
             StreetResource::collection($streets)

@@ -11,7 +11,7 @@ class Street extends Model
 
     protected $table = 'sokak_cadde';
     protected $primaryKey = 'sokak_cadde_id';
-    protected $fillable = ['sokak_cadde_title', 'sokak_cadde_mahallekey',];
+    protected $fillable = ['sokak_cadde_title', 'sokak_cadde_mahallekey'];
 
     public function neighborhood()
     {
