@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Enums\HelpStatusEnum;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\HelperFormRequest;
 use App\Http\Resources\DistrictResource;
 use App\Http\Resources\NeighborhoodResource;
 use App\Http\Resources\ProvinceResource;
@@ -54,7 +55,7 @@ class HelperController extends Controller
         );
     }
 
-    public function sendHelperForm(Request $request, $help_data_id)
+    public function sendHelperForm(HelperFormRequest $request, $help_data_id)
     {
         $help_data = HelpData::find($help_data_id);
         if (empty($help_data)) {
