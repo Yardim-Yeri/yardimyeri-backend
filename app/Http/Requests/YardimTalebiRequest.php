@@ -24,12 +24,12 @@ class YardimTalebiRequest extends FormRequest
     public function rules()
     {
         return [
-            'tel' => 'required',
-            'ihtiyac_turu' => 'required',
-            'kac_kisilik' => 'required',
-            'sehir' => 'required',
-            'ilce' => 'required',
-            'mahalle' => 'required',
+            'phone_number' => 'required',
+            'need_type' => 'required',
+            'how_many_person' => 'required',
+            'province' => 'required',
+            'district_id' => 'required',
+            'neighborhood_id' => 'required',
         ];
     }
 }
