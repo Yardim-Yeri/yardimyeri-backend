@@ -26,13 +26,13 @@ Route::get('/provinces/{province}/districts/{district}/neighborhoods', [HelperCo
 Route::get('/provinces/{province}/districts', [HelperController::class, 'getDistricts']);
 Route::get('/provinces', [HelperController::class, 'getProvinces']);
 
+Route::post('/send-help-form', [ApiController::class, 'sendHelpForm'])->name('api-send-yardim-talebi-form');
 Route::post('/send-helper-form/{help_data_id}', [HelperController::class, 'sendHelperForm']);
 
 Route::apiResource('help', HelpController::class);
 
 Route::get('/needs', [NeedsController::class, 'index']);
 Route::get('/get-country-data', [ApiController::class, 'getCountryData']);
-Route::post('/send-yardim-talebi-form', [ApiController::class, 'sendYardimTalebiForm'])->name('api-send-yardim-talebi-form');
 Route::post('/change-help-status/{id}', [ApiController::class, 'changeHelpStatus'])->name('api-change-help-status');
 
 Route::get('/export/help', [ApiController::class, 'exportSpreadsheet'])->name('api.export-spreadsheet');
