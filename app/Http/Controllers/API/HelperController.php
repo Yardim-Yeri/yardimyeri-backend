@@ -34,7 +34,7 @@ class HelperController extends Controller
         );
     }
 
-    public function getNeighborhoods($district)
+    public function getNeighborhoods($province, $district)
     {
         $neighborhoods = Neighborhood::where('mahalle_ilcekey', 'like', $district)->paginate(25);
 
@@ -43,7 +43,7 @@ class HelperController extends Controller
         );
     }
 
-    public function getStreets($neighborhood)
+    public function getStreets($province, $district, $neighborhood)
     {
         $streets = Neighborhood::where('sokak_cadde_mahallekey', 'like', $neighborhood)->paginate(25);
 
@@ -52,28 +52,26 @@ class HelperController extends Controller
         );
     }
 
-    public function sendHelperForm(Request $request,$help_data_id)
+    public function sendHelperForm(Request $request, $help_data_id)
     {
-        $help_data=HelpData::find($help_data_id);
-        if(!$help_data)
-        {
-            return $this->respondError('Yardım Talebi Mevcut Değil',404);
+        $help_data = HelpData::find($help_data_id);
+        if (!$help_data) {
+            return $this->respondError('Yardım Talebi Mevcut Değil', 404);
         }
 
-        if(!$request->has('name') || !$request->has('tel'))
-        {
-            return $this->respondError('Lütfen Boş Alan Bırakmayın',422);
+        if (!$request->has('name') || !$request->has('tel')) {
+            return $this->respondError('Lütfen Boş Alan Bırakmayın', 422);
         }
 
-        $helper= new HelperData();
-        $helper->name=$request->name;
-        $helper->tel=$request->tel;
+        $helper = new HelperData();
+        $helper->name = $request->name;
+        $helper->tel = $request->tel;
         $helper->email = $request->email;
-        $helper->help_data_id=$help_data_id;
-        $result=$helper->save();
+        $helper->help_data_id = $help_data_id;
+        $result = $helper->save();
 
-        return $result 
-        ? $this->respondSuccess('Yardım başarıyla başlatılmıştır. Lütfen yardım talep edene ait telefon numarası ile irtibata geçin.')
-        : $this->respondError('Yardım başlatılamadı');
+        return $result
+            ? $this->respondSuccess('Yardım başarıyla başlatılmıştır. Lütfen yardım talep edene ait telefon numarası ile irtibata geçin.')
+            : $this->respondError('Yardım başlatılamadı');
     }
 }
