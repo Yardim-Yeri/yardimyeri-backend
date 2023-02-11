@@ -26,7 +26,7 @@ class HelperFormRequest extends FormRequest
         return [
             'name' => 'required|min:2',
             'email' => 'nullable|email',
-            'tel' => 'required',
+            'phone_number' => 'required',
         ];
     }
 }
