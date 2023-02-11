@@ -2,8 +2,8 @@
 
 use App\Http\Controllers\API\HelpController;
 use App\Http\Controllers\API\HelperController;
+use App\Http\Controllers\API\NeedsController;
 use App\Http\Controllers\ApiController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,6 +30,7 @@ Route::post('/send-helper-form/{help_data_id}', [HelperController::class, 'sendH
 
 Route::apiResource('help', HelpController::class);
 
+Route::get('/needs', [NeedsController::class, 'index']);
 Route::get('/get-country-data', [ApiController::class, 'getCountryData']);
 Route::post('/send-yardim-talebi-form', [ApiController::class, 'sendYardimTalebiForm'])->name('api-send-yardim-talebi-form');
 Route::post('/change-help-status/{id}', [ApiController::class, 'changeHelpStatus'])->name('api-change-help-status');
