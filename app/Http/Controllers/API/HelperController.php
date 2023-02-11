@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Enums\HelpStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\DistrictResource;
 use App\Http\Resources\NeighborhoodResource;
@@ -64,15 +65,20 @@ class HelperController extends Controller
             return $this->respondError('Lütfen Boş Alan Bırakmayın', 422);
         }
 
-        $helper = new HelperData();
-        $helper->name = $request->name;
-        $helper->tel = $request->tel;
-        $helper->email = $request->email;
-        $helper->help_data_id = $help_data_id;
-        $result = $helper->save();
+        try {
+            $helper = new HelperData();
+            $helper->name = $request->name;
+            $helper->tel = $request->tel;
+            $helper->email = $request->email;
+            $helper->help_data_id = $help_data->id;
+            $helper->save();
 
-        return $result
-            ? $this->respondSuccess('Yardım başarıyla başlatılmıştır. Lütfen yardım talep edene ait telefon numarası ile irtibata geçin.')
-            : $this->respondError('Yardım başlatılamadı');
+            $help_data->help_status = HelpStatusEnum::PROCESS;
+            $help_data->save();
+
+            return $this->respondSuccess('Yardım başarıyla başlatılmıştır. Lütfen yardım talep edene ait telefon numarası ile irtibata geçin.');
+        } catch (\Throwable $th) {
+            return $this->respondError('Yardım başlatılamadı');
+        }
     }
 }
