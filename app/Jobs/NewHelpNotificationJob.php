@@ -59,7 +59,7 @@ class NewHelpNotificationJob implements ShouldQueue
 
         // Twitter Service
 
-        $tweet_template = $this->help->sehir .' ilinde '. $this->help->kac_kisilik. ' kişilik '.$this->help->ihtiyac_turu.' yardımına ihtiyaç var.  https://yardimyeri.com/yardimda-bulunabilirim/'. $this->help->id;
+        $tweet_template = $this->help->sehir .' ilinde '. $this->help->kac_kisilik. ' kişilik '.$this->help->ihtiyac_turu.' yardımına ihtiyaç var.  https://yardimyeri-8qndep9la-poyrazovic-s-team.vercel.app/'. $this->help->id;
         TwitterService::sendTweet($tweet_template);
         // it will send the tweet to the twitter account
     }
