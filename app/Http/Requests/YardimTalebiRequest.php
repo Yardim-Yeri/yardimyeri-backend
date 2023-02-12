@@ -27,9 +27,10 @@ class YardimTalebiRequest extends FormRequest
             'phone_number' => 'required',
             'need_type' => 'required',
             'how_many_person' => 'required',
-            'province' => 'required',
-            'district_id' => 'required',
-            'neighborhood_id' => 'required',
+            'province_id' => 'required|integer',
+            'district_id' => 'required|integer',
+            'neighborhood_id' => 'required|integer',
+            'street_id' => 'integer',
         ];
     }
 }

@@ -7,6 +7,7 @@ use App\Http\Requests\HelpStartRequest;
 use App\Http\Requests\YardimTalebiRequest;
 use App\Models\HelpData;
 use App\Models\HelperData;
+use App\Models\Province;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
@@ -44,13 +45,19 @@ class ApiController extends Controller
 
     public function sendHelpForm(YardimTalebiRequest $request)
     {
+        $province = Province::where('sehir_key', (int) $request->input('province_id'))->first();
+        
+        if (empty($province)) {
+            return $this->respondError('Province not found!');
+        }
+
         $help_data = new HelpData();
         $help_data->name = $request->input('name');
         $help_data->tel = $request->input('phone_number');
         $help_data->ihtiyac_turu = $request->input('need_type');
         $help_data->ihtiyac_turu_detayi = $request->input('need_type_detail');
         $help_data->kac_kisilik = $request->input('how_many_person');
-        $help_data->sehir = $request->input('province');
+        $help_data->sehir = $province->sehir_title;
         $help_data->ilce_id = $request->input('district_id');
         $help_data->mahalle_id = $request->input('neighborhood_id');
         $help_data->sokak_id = (int)$request->input('street_id');

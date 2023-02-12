@@ -81,7 +81,6 @@ class HelpController extends Controller
             return $this->respondError('help_status parameter required', 422);
         }
 
-
         try {
             $help_data = HelpData::find($id);
             if (empty($help_data)) {
