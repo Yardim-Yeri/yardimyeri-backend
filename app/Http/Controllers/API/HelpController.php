@@ -23,9 +23,9 @@ class HelpController extends Controller
 
         $collection = HelpData::filter()->orderBy($order_column, $order_direction)->paginate($limit);
 
-        $success_count = HelpData::where('help_status', '=', 'Yardım Ulaştı')->count();
-        $warning_count = HelpData::where('help_status', '=', 'Yardım Bekliyor')->count();
-        $info_count = HelpData::where('help_status', '=', 'Yardım Geliyor')->count();
+        $success_count = HelpData::where('help_status', '=', 'Yardım Ulaştı')->sum('kac_kisilik');
+        $warning_count = HelpData::where('help_status', '=', 'Yardım Bekliyor')->sum('kac_kisilik');
+        $info_count = HelpData::where('help_status', '=', 'Yardım Geliyor')->sum('kac_kisilik');
 
         $resource = HelpDataResource::collection($collection)->additional([
             'success_help_count' => $success_count,
