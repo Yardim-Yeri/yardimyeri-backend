@@ -39,3 +39,6 @@ Route::post('/change-help-status/{id}', [ApiController::class, 'changeHelpStatus
 Route::get('/export/help', [ApiController::class, 'exportSpreadsheet'])->name('api.export-spreadsheet');
 
 Route::get('/case/{base64}', [CaseController::class, 'index']);
+
+Route::get('/case-finish/{base64}', [CaseController::class, 'finish']);
+Route::get('/case-cancel/{base64}', [CaseController::class, 'cancel']);
