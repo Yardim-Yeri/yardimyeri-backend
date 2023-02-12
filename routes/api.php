@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\CaseController;
 use App\Http\Controllers\API\HelpController;
 use App\Http\Controllers\API\HelperController;
 use App\Http\Controllers\API\NeedsController;
@@ -36,3 +37,5 @@ Route::get('/get-country-data', [ApiController::class, 'getCountryData']);
 Route::post('/change-help-status/{id}', [ApiController::class, 'changeHelpStatus'])->name('api-change-help-status');
 
 Route::get('/export/help', [ApiController::class, 'exportSpreadsheet'])->name('api.export-spreadsheet');
+
+Route::get('/case/{base64}', [CaseController::class, 'index']);
