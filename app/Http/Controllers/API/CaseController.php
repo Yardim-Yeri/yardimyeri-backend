@@ -56,7 +56,7 @@ class CaseController extends Controller
                 return $this->respondNotFound('Yardım Talebi Bulunamadı');
             }
 
-            $help_data->help_status = HelpStatusEnum::FINISHED;
+            $help_data->help_status = HelpStatusEnum::SUCCESS;
             $help_data->save();
 
             return response()->json(['message' => 'Yardım Talebi Başarıyla Tamamlandı'], 200);
