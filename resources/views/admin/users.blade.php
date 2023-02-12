@@ -31,8 +31,8 @@
                         <div class="mb-3">
                             <label>Kullanıcı Rolü</label>
                             <select name="role" class="form-select">
-                                <option value="0">Admin</option>
-                                <option value="1">Teyitçi</option>
+                                <option value="1">Admin</option>
+                                <option value="2">Teyitçi</option>
                             </select>
                         </div>
                     </div>
@@ -62,7 +62,7 @@
                         <td>{{ $user->id }}</td>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
-                        <td>{{ $user->role == 0 ? 'Admin' : 'Teyitçi' }}</td>
+                        <td>{{ $user->role == 1 ? 'Admin' : 'Teyitçi' }}</td>
                         <td>
                             <a href="{{ route('delete.admin-users', $user->id) }}"
                                 onclick="return confirm('Kullanıcıyı Silmek İstediğinize Emin misinmiz?');"

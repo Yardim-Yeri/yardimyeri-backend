@@ -13,7 +13,7 @@ class LinkController extends Controller
           $this->middleware(function ($request, $next) {
                $user = auth()->user();
 
-               if ($user->role == 1) {
+               if ($user->role == 2) {
                     return redirect()->route('get.admin-demands');
                }
 

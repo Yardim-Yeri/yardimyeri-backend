@@ -65,7 +65,7 @@
                     </div>
 
                     <div class="col-3">
-                        @if (auth()->user()->role == 0)
+                        @if (auth()->user()->role == 1)
                             <button type="submit" class="btn btn-primary px-5">Kaydet</button>
                         @endif
                     </div>

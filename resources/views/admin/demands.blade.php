@@ -69,7 +69,7 @@
                         <td>
                             <div class="d-flex gap-2">
                                 <a href="{{ route('show.admin-demand', $item->id) }}" class="btn btn-primary">Detaylar</a>
-                                @if (auth()->user()->role == 0)
+                                @if (auth()->user()->role == 1)
                                     <form action="{{ route('delete.admin-demand', ['id' => $item->id]) }}" method="POST"
                                         class="delete-form">
                                         @csrf
