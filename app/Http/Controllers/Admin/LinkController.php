@@ -8,38 +8,54 @@ use Illuminate\Http\Request;
 
 class LinkController extends Controller
 {
-    public function index(){
-        $links=UsefulLink::get();
-        return view('admin.useful-links',compact('links'));
-   }
+     public function __construct()
+     {
+          $this->middleware(function ($request, $next) {
+               $user = auth()->user();
 
-   public function store(Request $request){
-        $link = new UsefulLink();
-        $link->title = $request->title;
-        $link->url = $request->url;
-        $link->description = $request->description;
-        $link->save();
+               if ($user->role == 1) {
+                    return redirect()->route('get.admin-demands');
+               }
 
-        return $link
-        ? back()->with('success','Link Başarıyla Oluşturuldu')
-        : back()->with('error','Link Oluşturulamadı');
-   }
+               return $next($request);
+          });
+     }
 
-   public function update(Request $request,$id){
-        $link = UsefulLink::find($id);
-        $link->title = $request->title;
-        $link->url = $request->url;
-        $link->description = $request->description;
-        $link->save();
-        return $link
-        ? back()->with('success','Link Başarıyla Güncellendi')
-        : back()->with('error','Link Güncellenemedi');
+     public function index()
+     {
+          $links = UsefulLink::get();
+          return view('admin.useful-links', compact('links'));
+     }
 
-   }
+     public function store(Request $request)
+     {
+          $link = new UsefulLink();
+          $link->title = $request->title;
+          $link->url = $request->url;
+          $link->description = $request->description;
+          $link->save();
 
-   public function delete($id){
-        return UsefulLink::whereId($id)->delete()
-        ? back()->with('success','Link Başarıyla Silindi')
-        : back()->with('error','Link Silinemedi');
-   }
+          return $link
+               ? back()->with('success', 'Link Başarıyla Oluşturuldu')
+               : back()->with('error', 'Link Oluşturulamadı');
+     }
+
+     public function update(Request $request, $id)
+     {
+          $link = UsefulLink::find($id);
+          $link->title = $request->title;
+          $link->url = $request->url;
+          $link->description = $request->description;
+          $link->save();
+          return $link
+               ? back()->with('success', 'Link Başarıyla Güncellendi')
+               : back()->with('error', 'Link Güncellenemedi');
+     }
+
+     public function delete($id)
+     {
+          return UsefulLink::whereId($id)->delete()
+               ? back()->with('success', 'Link Başarıyla Silindi')
+               : back()->with('error', 'Link Silinemedi');
+     }
 }

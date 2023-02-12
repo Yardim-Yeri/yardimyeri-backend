@@ -10,33 +10,38 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         return view('admin.login');
     }
 
-    public function login(Request $request){
+    public function login(Request $request)
+    {
 
-        if(Auth::attempt(['name'=>$request->username,'password'=>$request->password ])){
-           return redirect()->route('get.admin-demands');
+        if (Auth::attempt(['name' => $request->username, 'password' => $request->password])) {
+            return redirect()->route('get.admin-demands');
         }
-        return back()->with('error','Kullanıcı Adı veya Şifre Hatalı');
+        return back()->with('error', 'Kullanıcı Adı veya Şifre Hatalı');
     }
 
 
-    public function register(Request $request){
-        $user=User::create([
-            'name'=>$request->name,
-            'email'=>$request->email,
-            'password'=>Hash::make($request->password)
+    public function register(Request $request)
+    {
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'role' => $request->role
         ]);
 
         return $user
-        ? back()->with('success','Kullanıcı Eklendi')
-        : back()->with('error','Kullanıcı Eklenemedi');
+            ? back()->with('success', 'Kullanıcı Eklendi')
+            : back()->with('error', 'Kullanıcı Eklenemedi');
     }
 
-    public function logout(){
+    public function logout()
+    {
         Auth::logout();
-        return redirect()->route('get.login')->with('info','Çıkış Yapıldı');
+        return redirect()->route('get.login')->with('info', 'Çıkış Yapıldı');
     }
 }

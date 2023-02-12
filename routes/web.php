@@ -37,6 +37,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('demands', [DemandController::class, 'index'])->name('get.admin-demands');
     Route::get('demands/{id}', [DemandController::class, 'show'])->name('show.admin-demand');
     Route::post('demands/{id}', [DemandController::class, 'update'])->name('update.admin-demand');
+    Route::get('demands/update-approved-status/{id}', [DemandController::class, 'approved'])->name('update.admin-demand-approved');
     Route::post('demands/delete/{id}', [DemandController::class, 'destroy'])->name('delete.admin-demand');
     Route::get('users', [UsersController::class, 'index'])->name('get.admin-users');
     Route::post('users', [AuthController::class, 'register'])->name('store.admin-users');
