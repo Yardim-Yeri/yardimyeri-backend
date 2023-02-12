@@ -68,8 +68,6 @@ class ApiController extends Controller
         $help_data->lng = $request->input('lng');
         $help_data->save();
 
-        dd($help_data);
-
         NewHelpNotificationJob::dispatch($help_data);
 
         return $this->respondSuccess('Yardım talebiniz başarıyla kaydedilmiştir.');
