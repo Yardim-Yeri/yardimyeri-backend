@@ -19,9 +19,10 @@ class PageController extends Controller
             return $this->yardimdaBulunabilirimShow($id);
         }
 
-        $success_count = HelpData::where('help_status', '=', 'Yardım Ulaştı')->count();
-        $warning_count = HelpData::where('help_status', '=', 'Yardım Bekliyor')->count();
-        $info_count = HelpData::where('help_status', '=', 'Yardım Geliyor')->count();
+        $success_count = HelpData::where('help_status', '=', 'Yardım Ulaştı')->sum('kac_kisilik');
+        $warning_count = HelpData::where('help_status', '=', 'Yardım Bekliyor')->sum('kac_kisilik');
+        $info_count = HelpData::where('help_status', '=', 'Yardım Geliyor')->sum('kac_kisilik');
+
         $data = HelpData::where('help_status', '!=', 'Yardım Ulaştı')
             ->filter()
             ->orderBy('created_at', 'DESC')

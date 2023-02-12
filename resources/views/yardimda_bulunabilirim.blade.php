@@ -22,7 +22,7 @@
             <div class="col-md-4 mt-3">
                 <div class="card bg-success mx-sm-1 p-3">
                     <div class="text-white text-center mt-3">
-                        <h4>Ulaştırılan Yardım Sayısı</h4>
+                        <h4>Yardım Ulaştırılan Kişi Sayısı</h4>
                     </div>
                     <div class="text-white text-center mt-2">
                         <h1>{{ $success_count }}</h1>
@@ -32,7 +32,7 @@
             <div class="col-md-4 mt-3">
                 <div class="card bg-warning mx-sm-1 p-3">
                     <div class="text-dark text-center mt-3">
-                        <h4>Bekleyen Yardım Sayısı</h4>
+                        <h4>Yardım Bekleyen Kişi Sayısı</h4>
                     </div>
                     <div class="text-dark text-center mt-2">
                         <h1>{{ $warning_count }}</h1>
@@ -42,7 +42,7 @@
             <div class="col-md-4 mt-3">
                 <div class="card bg-info mx-sm-1 p-3">
                     <div class="text-white text-center mt-3">
-                        <h4>Ulaştırılmakta Olan Yardım Sayısı</h4>
+                        <h4>Yardım Ulaştırılacak Kişi Sayısı</h4>
                     </div>
                     <div class="text-white text-center mt-2">
                         <h1>{{ $info_count }}</h1>
