@@ -4,6 +4,7 @@ use App\Http\Controllers\API\CaseController;
 use App\Http\Controllers\API\HelpController;
 use App\Http\Controllers\API\HelperController;
 use App\Http\Controllers\API\NeedsController;
+use App\Http\Controllers\API\UsefulLinksController;
 use App\Http\Controllers\ApiController;
 use Illuminate\Support\Facades\Route;
 
@@ -42,3 +43,4 @@ Route::get('/case/{base64}', [CaseController::class, 'index']);
 
 Route::get('/case-finish/{base64}', [CaseController::class, 'finish']);
 Route::get('/case-cancel/{base64}', [CaseController::class, 'cancel']);
+Route::get('/useful-links', [UsefulLinksController::class, 'index']);
