@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class HelperData extends Model
 {
     use HasFactory;
+
+    public function help()
+    {
+        return $this->belongsTo(HelpData::class, 'help_data_id', 'id');
+    }
 }
