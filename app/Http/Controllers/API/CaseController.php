@@ -47,7 +47,7 @@ class CaseController extends Controller
         $helpId = $base64[0] ?? null;
         $helperPhone = $base64[1] ?? null;
 
-        $helperCheck = HelperData::where('help_data_id', $helpId)->where('tel', $helperPhone)->first();
+        $helperCheck = HelperData::where('help_data_id', $helpId)->where('tel', $helperPhone)->where('status',HelpStatusEnum::PROCESS)->first();
 
         if($helperCheck){
             $help_data = HelpData::find($helpId);
