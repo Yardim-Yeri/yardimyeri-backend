@@ -14,8 +14,11 @@ class CaseController extends Controller
 
     // get all cases
 
-    public function index(Request $request, $base64)
+    public function index(Request $request)
     {
+        $base64 = (string) $request->input('id');
+        abort_if(empty($base64), 404);
+
         $base64 = base64_decode($base64);
         $base64 = explode("?", $base64);
         $helpId = $base64[0] ?? null;
@@ -40,8 +43,11 @@ class CaseController extends Controller
 
     // finish a case
 
-    public function finish(Request $request, $base64)
+    public function finish(Request $request)
     {
+        $base64 = (string) $request->input('id');
+        abort_if(empty($base64), 404);
+
         $base64 = base64_decode($base64);
         $base64 = explode("?", $base64);
         $helpId = $base64[0] ?? null;
@@ -66,8 +72,11 @@ class CaseController extends Controller
     }
 
     // cancel a case
-    public function cancel(Request $request, $base64)
+    public function cancel(Request $request)
     {
+        $base64 = (string) $request->input('id');
+        abort_if(empty($base64), 404);
+        
         $base64 = base64_decode($base64);
         $base64 = explode("?", $base64);
         $helpId = $base64[0] ?? null;
