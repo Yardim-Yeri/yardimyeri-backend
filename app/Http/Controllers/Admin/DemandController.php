@@ -10,7 +10,6 @@ class DemandController extends Controller
 {
     public function index(Request $request)
     {
-
         $data = $request->has('status')
             ? HelpData::orderBy('created_at', 'DESC')->with('helper')->where('help_status', $request->status)->paginate(200)
             : HelpData::orderBy('created_at', 'DESC')->with('helper')->paginate(200);
@@ -42,6 +41,16 @@ class DemandController extends Controller
         return $status
             ? back()->with('success', 'Talep Güncellendi')
             : back()->with('error', 'Talep Güncellenemedi');
+    }
+
+    public function approved($id)
+    {
+        $help_data = HelpData::findOrFail($id);
+
+        $help_data->approved = !$help_data->approved;
+        $status = $help_data->save();
+
+        return $status ? response()->json(['success' => true]) : response()->json(['success' => false]);
     }
 
     public function destroy($id)

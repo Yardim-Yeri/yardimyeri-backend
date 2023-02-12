@@ -27,6 +27,7 @@
                     <th scope="col">YARDIM EDEN</th>
                     <th scope="col">YARDIM EDEN TEL</th>
                     <th scope="col">YARDIM EDEN EMAıL</th>
+                    <th scope="col">TEYİTLİ</th>
                     <th width="150" scope="col">İŞLEMLER</th>
                 </tr>
             </thead>
@@ -62,14 +63,19 @@
                         <td>
                             {{ $item->helper?->email }}
                         </td>
+                        <td align="center">
+                            <input data-id="{{ $item->id }}" class="form-check-input approved-input" type="checkbox" {{ $item->approved == 1 ? 'checked' : '' }}>
+                        </td>
                         <td>
                             <div class="d-flex gap-2">
                                 <a href="{{ route('show.admin-demand', $item->id) }}" class="btn btn-primary">Detaylar</a>
-                                <form action="{{ route('delete.admin-demand', ['id' => $item->id]) }}" method="POST"
-                                    class="delete-form">
-                                    @csrf
-                                    <button type="submit" class="btn btn-danger">Sil</button>
-                                </form>
+                                @if (auth()->user()->role == 1)
+                                    <form action="{{ route('delete.admin-demand', ['id' => $item->id]) }}" method="POST"
+                                        class="delete-form">
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger">Sil</button>
+                                    </form>
+                                @endif
                             </div>
                         </td>
                     </tr>
@@ -92,6 +98,11 @@
                 if (confirm('Veri silinecek emin misiniz?')) {
                     alert('Veri silindi');
                 }
+            });
+
+            $('.approved-input').on('change', function() {
+                var url = "/admin/demands/update-approved-status/" + $(this).data('id');
+                $.get(url);
             });
         </script>
     @endpush
