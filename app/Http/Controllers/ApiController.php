@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\HelpDataExport;
 use App\Http\Requests\HelpStartRequest;
 use App\Http\Requests\YardimTalebiRequest;
+use App\Jobs\NewHelpNotificationJob;
 use App\Models\HelpData;
 use App\Models\HelperData;
 use App\Models\Province;
@@ -66,6 +67,8 @@ class ApiController extends Controller
         $help_data->lat = $request->input('lat');
         $help_data->lng = $request->input('lng');
         $help_data->save();
+
+        NewHelpNotificationJob::dispatch($help_data);
 
         return $this->respondSuccess('Yardım talebiniz başarıyla kaydedilmiştir.');
     }

@@ -40,7 +40,6 @@ class NewHelpNotificationJob implements ShouldQueue
     {
 
         //Stencil Service
-
         $image_url = StencilService::generateFeaturedImage(strval($this->help->kac_kisilik), $this->help->sehir, $this->help->ihtiyac_turu)["image_url"];
         // download the image and save it to the public folder
 
@@ -51,15 +50,12 @@ class NewHelpNotificationJob implements ShouldQueue
         // it will save the image to the public folder with the name of the help id
 
         // Netgsm Service
-
         $phone_number = $this->help->tel;
         $formatted_number = preg_replace("/[^0-9]/", "", $phone_number);
         Log::alert($formatted_number .'_'. $this->help->id);
         $sms =  new Netgsm();
 
-        $sms->send($formatted_number, 'yardimyeri.com dan oluşturduğunuz #'. $this->help->id.' numaralı yardım talebiniz başarıyla oluşturulmuştur. Yardım talebiniz onaylandığında size SMS ile bildirilecektir. Geçmiş olsun.');
-
-
+        $sms->send($formatted_number, 'yardimyeri.com\'dan oluşturduğunuz #'. $this->help->id.' numaralı yardım talebiniz başarıyla oluşturulmuştur. Yardım talebiniz onaylandığında size SMS ile bildirilecektir. Geçmiş olsun.');
 
         // Twitter Service
 

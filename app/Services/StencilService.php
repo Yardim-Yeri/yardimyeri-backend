@@ -28,7 +28,6 @@ class StencilService
         $url = 'https://api.usestencil.com/v1/images/sync';
         $token = env('STENCIL_TOKEN');
 
-
         $data = [
             "template" => env('STENCIL_TEMPLATE'),
             "modifications" => [

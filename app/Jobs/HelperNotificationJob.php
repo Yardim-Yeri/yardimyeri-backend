@@ -32,7 +32,6 @@ class HelperNotificationJob implements ShouldQueue
      */
     public function handle()
     {
-
         $phone = $this->helper_data->tel;
         $formatted_number = preg_replace("/[^0-9]/", "", $phone);
         $email = $this->helper_data->email;
@@ -40,11 +39,10 @@ class HelperNotificationJob implements ShouldQueue
 
         $base64 = base64_encode($helpId . '?' . $phone);
 
-        $url = 'https://yardimyeri.com/case/' . $base64;
-
-
+        // $url = 'https://yardimyeri.com/yardim/' . $base64;
+        $url = 'https://yardimyeri-n9l9glkif-poyrazovic-s-team.vercel.app/yardim?id=' . $base64;
 
         $sms = new Netgsm();
-        $sms->send($formatted_number, 'yardimyeri.com dan oluşturduğunuz yardım için teşekkür ederiz. Yardımı tamamlandığınızda aşağıdaki linke tıklayarak yardımı tamamladığınızı bildirebilirsiniz. ' . $url . ' Geçmiş olsun.');
+        $sms->send($formatted_number, 'yardimyeri.com\'dan oluşturduğunuz yardım için teşekkür ederiz. Yardımı tamamlandığınızda aşağıdaki linke tıklayarak yardımı tamamladığınızı bildirebilirsiniz. ' . $url . ' Geçmiş olsun.');
     }
 }

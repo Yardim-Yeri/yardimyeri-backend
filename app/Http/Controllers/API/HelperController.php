@@ -9,6 +9,7 @@ use App\Http\Resources\DistrictResource;
 use App\Http\Resources\NeighborhoodResource;
 use App\Http\Resources\ProvinceResource;
 use App\Http\Resources\StreetResource;
+use App\Jobs\HelperNotificationJob;
 use App\Models\District;
 use App\Models\HelpData;
 use App\Models\HelperData;
@@ -72,6 +73,8 @@ class HelperController extends Controller
 
             $help_data->help_status = HelpStatusEnum::PROCESS;
             $help_data->save();
+
+            HelperNotificationJob::dispatch($helper);
 
             return $this->respondSuccess('Yardım başarıyla başlatılmıştır. Lütfen yardım talep edene ait telefon numarası ile irtibata geçin.');
         } catch (\Throwable $th) {
