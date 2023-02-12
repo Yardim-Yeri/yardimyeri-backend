@@ -40,6 +40,7 @@ class NewHelpNotificationJob implements ShouldQueue
     {
 
         //Stencil Service
+        dd($this->help);
         $image_url = StencilService::generateFeaturedImage(strval($this->help->kac_kisilik), $this->help->sehir, $this->help->ihtiyac_turu)["image_url"];
         // download the image and save it to the public folder
 
