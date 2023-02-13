@@ -39,13 +39,13 @@ class NewHelpNotificationJob implements ShouldQueue
     public function handle()
     {
 
-        //Stencil Service
-        $image_url = StencilService::generateFeaturedImage(strval($this->help->kac_kisilik), $this->help->sehir, $this->help->ihtiyac_turu)["image_url"];
-        // download the image and save it to the public folder
+        // //Stencil Service
+        // $image_url = StencilService::generateFeaturedImage(strval($this->help->kac_kisilik), $this->help->sehir, $this->help->ihtiyac_turu)["image_url"];
+        // // download the image and save it to the public folder
 
-        $image = file_get_contents($image_url);
-        Log::info($image_url.'-'.$this->help->id);
-        file_put_contents(public_path('images/'.$this->help->id.'.png'), $image);
+        // $image = file_get_contents($image_url);
+        // Log::info($image_url.'-'.$this->help->id);
+        // file_put_contents(public_path('images/'.$this->help->id.'.png'), $image);
 
         // it will save the image to the public folder with the name of the help id
 
@@ -59,7 +59,7 @@ class NewHelpNotificationJob implements ShouldQueue
 
         // Twitter Service
 
-        $tweet_template = $this->help->sehir .' ilinde '. $this->help->kac_kisilik. ' kişilik '.$this->help->ihtiyac_turu.' yardımına ihtiyaç var.  https://yardimyeri-8qndep9la-poyrazovic-s-team.vercel.app/'. $this->help->id;
+        $tweet_template = $this->help->sehir .' ilinde '. $this->help->kac_kisilik. ' kişilik '.$this->help->ihtiyac_turu.' yardımına ihtiyaç var. '.env('APP_URL'). '/yardimda-bulunabilirim'. $this->help->id;
         TwitterService::sendTweet($tweet_template);
         // it will send the tweet to the twitter account
     }
