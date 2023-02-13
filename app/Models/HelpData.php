@@ -4,9 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class HelpData extends Model
 {
+    use SoftDeletes;
     use HasFactory;
 
     protected $fillable = [
@@ -61,6 +63,16 @@ class HelpData extends Model
 
         if (request()->filled('sehir')) {
             $q->where('sehir', mb_strtoupper(request()->input('sehir')));
+        }
+
+        // status
+        if (request()->filled('help_status')) {
+            $q->where('help_status', request()->input('help_status'));
+        }
+
+        // kac_kisilik
+        if (request()->filled('kac_kisilik')) {
+            $q->where('kac_kisilik', request()->input('kac_kisilik'));
         }
 
         return $q;

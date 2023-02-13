@@ -8,25 +8,27 @@ use Illuminate\Http\Request;
 
 class DemandController extends Controller
 {
-    public function index(Request $request){
+    public function index(Request $request)
+    {
+        $data = $request->has('status')
+            ? HelpData::orderBy('created_at', 'DESC')->with('helper')->where('help_status', $request->status)->paginate(200)
+            : HelpData::orderBy('created_at', 'DESC')->with('helper')->paginate(200);
 
-        $data=$request->has('status')
-        ? HelpData::orderBy('created_at', 'DESC')->with('helper')->where('help_status',$request->status)->paginate(200)
-        : HelpData::orderBy('created_at', 'DESC')->with('helper')->paginate(200);
-        
-        $status=$request->status;
+        $status = $request->status;
 
-        return view('admin.demands', compact('data','status'));
+        return view('admin.demands', compact('data', 'status'));
     }
 
-    public function show($id){
-        $data=HelpData::find($id);
+    public function show($id)
+    {
+        $data = HelpData::find($id);
 
-        return view('admin.demand-show',compact('data'));
+        return view('admin.demand-show', compact('data'));
     }
 
-    public function update(Request $request, $id){
-        $data=HelpData::find($id);
+    public function update(Request $request, $id)
+    {
+        $data = HelpData::find($id);
 
         $data->name = $request->name;
         $data->tel = $request->tel;
@@ -34,11 +36,30 @@ class DemandController extends Controller
         $data->kac_kisilik = $request->kac_kisilik;
         $data->help_status = $request->help_status;
 
-        $status=$data->save();
-
+        $status = $data->save();
 
         return $status
-        ? back()->with('success','Talep Güncellendi')
-        : back()->with('error','Talep Güncellenemedi');
+            ? back()->with('success', 'Talep Güncellendi')
+            : back()->with('error', 'Talep Güncellenemedi');
+    }
+
+    public function approved($id)
+    {
+        $help_data = HelpData::findOrFail($id);
+
+        $help_data->approved = !$help_data->approved;
+        $status = $help_data->save();
+
+        return $status ? response()->json(['success' => true]) : response()->json(['success' => false]);
+    }
+
+    public function destroy($id)
+    {
+        $help_data = HelpData::find($id);
+        $status = $help_data->delete();
+
+        return $status
+            ? back()->with('success', 'Talep Silindi')
+            : back()->with('error', 'Talep Silinemedi');
     }
 }

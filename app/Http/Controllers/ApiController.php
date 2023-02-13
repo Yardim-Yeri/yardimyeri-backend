@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\HelpDataExport;
 use App\Http\Requests\HelpStartRequest;
 use App\Http\Requests\YardimTalebiRequest;
+use App\Jobs\NewHelpNotificationJob;
 use App\Models\HelpData;
 use App\Models\HelperData;
+use App\Models\Province;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
@@ -42,25 +44,33 @@ class ApiController extends Controller
         abort(404);
     }
 
-    public function sendYardimTalebiForm(YardimTalebiRequest $request)
+    public function sendHelpForm(YardimTalebiRequest $request)
     {
+        $province = Province::where('sehir_key', (int) $request->input('province_id'))->first();
+        
+        if (empty($province)) {
+            return $this->respondError('Province not found!');
+        }
+
         $help_data = new HelpData();
         $help_data->name = $request->input('name');
-        $help_data->tel = $request->input('tel');
-        $help_data->ihtiyac_turu = $request->input('ihtiyac_turu');
-        $help_data->ihtiyac_turu_detayi = $request->input('ihtiyac_turu_detayi');
-        $help_data->kac_kisilik = $request->input('kac_kisilik');
-        $help_data->sehir = $request->input('sehir');
-        $help_data->ilce_id = $request->input('ilce');
-        $help_data->mahalle_id = $request->input('mahalle');
-        $help_data->sokak_id = (int)$request->input('sokak');
-        $help_data->apartman = $request->input('apartman');
-        $help_data->adres_tarifi = $request->input('adres_tarifi');
+        $help_data->tel = $request->input('phone_number');
+        $help_data->ihtiyac_turu = $request->input('need_type');
+        $help_data->ihtiyac_turu_detayi = $request->input('need_type_detail');
+        $help_data->kac_kisilik = $request->input('how_many_person');
+        $help_data->sehir = $province->sehir_title;
+        $help_data->ilce_id = $request->input('district_id');
+        $help_data->mahalle_id = $request->input('neighborhood_id');
+        $help_data->sokak_id = (int)$request->input('street_id');
+        $help_data->apartman = $request->input('apartment');
+        $help_data->adres_tarifi = $request->input('for_directions');
         $help_data->lat = $request->input('lat');
         $help_data->lng = $request->input('lng');
         $help_data->save();
 
-        return response()->json(['success' => true, 'message' => 'Yardım talebiniz başarıyla kaydedilmiştir.']);
+        NewHelpNotificationJob::dispatch($help_data);
+
+        return $this->respondSuccess('Yardım talebiniz başarıyla kaydedilmiştir.');
     }
 
     public function changeHelpStatus(HelpStartRequest $request, $id)

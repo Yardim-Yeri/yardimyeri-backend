@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\API\CaseController;
 use App\Http\Controllers\API\HelpController;
 use App\Http\Controllers\API\HelperController;
+use App\Http\Controllers\API\NeedsController;
+use App\Http\Controllers\API\UsefulLinksController;
 use App\Http\Controllers\ApiController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,17 +23,24 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::get('/provinces/{province}/districts/{district}/neighborhoods/{neighborhood}/streets', [HelperController::class, 'getStreets']);
-Route::get('/provinces/{province}/districts/{district}/neighborhoods', [HelperController::class, 'getNeighborhoods']);
-Route::get('/provinces/{province}/districts', [HelperController::class, 'getDistricts']);
+Route::get('/streets/{neighborhood}', [HelperController::class, 'getStreets']);
+Route::get('/neighborhoods/{district}', [HelperController::class, 'getNeighborhoods']);
+Route::get('/districts/{province}', [HelperController::class, 'getDistricts']);
 Route::get('/provinces', [HelperController::class, 'getProvinces']);
 
+Route::post('/send-help-form', [ApiController::class, 'sendHelpForm'])->name('api-send-yardim-talebi-form');
 Route::post('/send-helper-form/{help_data_id}', [HelperController::class, 'sendHelperForm']);
 
 Route::apiResource('help', HelpController::class);
 
+Route::get('/needs', [NeedsController::class, 'index']);
 Route::get('/get-country-data', [ApiController::class, 'getCountryData']);
-Route::post('/send-yardim-talebi-form', [ApiController::class, 'sendYardimTalebiForm'])->name('api-send-yardim-talebi-form');
 Route::post('/change-help-status/{id}', [ApiController::class, 'changeHelpStatus'])->name('api-change-help-status');
 
 Route::get('/export/help', [ApiController::class, 'exportSpreadsheet'])->name('api.export-spreadsheet');
+
+Route::get('/case', [CaseController::class, 'index']);
+Route::get('/case-finish', [CaseController::class, 'finish']);
+Route::get('/case-cancel', [CaseController::class, 'cancel']);
+
+Route::get('/useful-links', [UsefulLinksController::class, 'index']);

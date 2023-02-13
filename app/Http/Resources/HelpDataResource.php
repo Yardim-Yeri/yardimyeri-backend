@@ -24,7 +24,7 @@ class HelpDataResource extends JsonResource
             ],
             'how_many_person' => $this->kac_kisilik,
             'address' => $this->adres,
-            'for directions' => $this->adres_tarifi,
+            'for_directions' => $this->adres_tarifi,
             'lat' => $this->lat,
             'lng' => $this->lng,
             'status' => $this->help_status,

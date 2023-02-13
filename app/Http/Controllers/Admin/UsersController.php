@@ -8,15 +8,30 @@ use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
-    public function index(){
-        $users = User::get();
-        return view('admin.users',compact('users'));
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            $user = auth()->user();
+
+            if ($user->role == 2) {
+                return redirect()->route('get.admin-demands');
+            }
+
+            return $next($request);
+        });
     }
 
-    public function delete($id){
-        $user=User::whereId($id)->delete();
+    public function index()
+    {
+        $users = User::get();
+        return view('admin.users', compact('users'));
+    }
+
+    public function delete($id)
+    {
+        $user = User::whereId($id)->delete();
         return $user
-        ? back()->with('success','Kullanıcı Silindi')
-        : back()->with('error','Kullanıcı Silinemedi');
+            ? back()->with('success', 'Kullanıcı Silindi')
+            : back()->with('error', 'Kullanıcı Silinemedi');
     }
 }
