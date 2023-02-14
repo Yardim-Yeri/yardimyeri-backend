@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         \DB::unprepared(file_get_contents('database/seeders/sehirler_mahalleler_sokaklar.sql'));
-        $this->createHelpData();
+        // $this->createHelpData();
     }
 
     protected function createHelpData()

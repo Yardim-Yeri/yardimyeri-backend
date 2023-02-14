@@ -40,7 +40,7 @@ class TwitterService
                 'text' => $message
             ]),
             CURLOPT_HTTPHEADER => array(
-                'Authorization: OAuth oauth_consumer_key="'.env('OAUTH_CONSUMER_KEY').'",oauth_token="'.env('OAUTH_KEY').'",oauth_signature_method="HMAC-SHA1",oauth_timestamp="1676103303",oauth_nonce="6tW6Oci7Mza",oauth_version="1.0",oauth_signature="oZmO1Kxpb21wbv0B77%2BdTNrMQ%2F0%3D"',
+                'Authorization: OAuth oauth_consumer_key="'.env('OAUTH_CONSUMER_KEY').'",oauth_token="'.env('OAUTH_KEY').'",oauth_signature_method="HMAC-SHA1",oauth_timestamp="1676238605",oauth_nonce="Twm6ISZeR3S",oauth_version="1.0",oauth_signature="bnSMQTgQ%2FntbAPWc0L0PWJufEXo%3D"',
                 'Content-Type: application/json',
                 'Cookie: guest_id=v1%3A167610308945802700'
             ),

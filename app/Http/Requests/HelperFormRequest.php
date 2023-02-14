@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class YardimTalebiRequest extends FormRequest
+class HelperFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,13 +24,9 @@ class YardimTalebiRequest extends FormRequest
     public function rules()
     {
         return [
+            'name' => 'required|min:2',
+            'email' => 'nullable|email',
             'phone_number' => 'required',
-            'need_type' => 'required',
-            'how_many_person' => 'required',
-            'province_id' => 'required|integer',
-            'district_id' => 'required|integer',
-            'neighborhood_id' => 'required|integer',
-            'street_id' => 'integer',
         ];
     }
 }

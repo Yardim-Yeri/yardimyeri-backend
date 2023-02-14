@@ -11,6 +11,22 @@ class HelpData extends Model
     use SoftDeletes;
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'tel',
+        'ihtiyac_turu',
+        'ihtiyac_turu_detayi',
+        'kac_kisilik',
+        'sehir',
+        'ilce_id',
+        'mahalle_id',
+        'sokak_id',
+        'apartman',
+        'adres_tarifi',
+        'lat',
+        'lng',
+    ];
+
     // relationship
     public function ilce()
     {
@@ -47,6 +63,16 @@ class HelpData extends Model
 
         if (request()->filled('sehir')) {
             $q->where('sehir', mb_strtoupper(request()->input('sehir')));
+        }
+
+        // status
+        if (request()->filled('help_status')) {
+            $q->where('help_status', request()->input('help_status'));
+        }
+
+        // kac_kisilik
+        if (request()->filled('kac_kisilik')) {
+            $q->where('kac_kisilik', request()->input('kac_kisilik'));
         }
 
         return $q;
