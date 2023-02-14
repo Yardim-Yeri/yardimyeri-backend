@@ -12,7 +12,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
-use Termwind\Components\Dd;
+use App\Models\SMS;
 
 class NewHelpNotificationJob implements ShouldQueue
 {
@@ -55,12 +55,35 @@ class NewHelpNotificationJob implements ShouldQueue
         Log::alert($formatted_number .'_'. $this->help->id);
         
         $sms =  new Netgsm();
-        $sms->send($formatted_number, 'yardimyeri.com\'dan oluşturduğunuz #'. $this->help->id.' numaralı yardım talebiniz başarıyla oluşturulmuştur. Yardım talebiniz onaylandığında size SMS ile bildirilecektir. Geçmiş olsun.');
+        $sms_content = 'yardimyeri.com\'dan oluşturduğunuz #'. $this->help->id.' numaralı yardım talebiniz başarıyla oluşturulmuştur. Yardım talebiniz onaylandığında size SMS ile bildirilecektir. Geçmiş olsun.';
+        $sms->send($formatted_number, $sms_content);
+        
+        
+        SMS::create([
+             'sms_content' => $sms_content,
+             'case_id' => $this->help->id,
+             'recieve_number' => $formatted_number,
+             'provider_response' => $sms,
+             'data' => json_encode([
+             'sms_content' => $sms_content,
+             'case_id' => $this->help->id,
+             'recieve_number' => $formatted_number,
+             'provider_response' => $sms,
+             ])
+             ]);
+
 
         // Twitter Service
 
         $tweet_template = $this->help->sehir .' ilinde '. $this->help->kac_kisilik. ' kişilik '.$this->help->ihtiyac_turu.' yardımına ihtiyaç var. '.env('APP_URL'). '/yardimda-bulunabilirim'. $this->help->id;
-        TwitterService::sendTweet($tweet_template);
+        $tweet = TwitterService::sendTweet($tweet_template);
+        Tweet::create([
+            'tweet_content' => $tweet_template,
+            'case_id' => $this->help->id,
+            'status' => $tweet ? 1 : 0,
+            'tweet_id' => $tweet->data->id,
+            'data' => json_encode($tweet)
+        ]);
         // it will send the tweet to the twitter account
     }
 
