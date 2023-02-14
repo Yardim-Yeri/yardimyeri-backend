@@ -44,7 +44,7 @@ class FixOldCases extends Command
             $person_name = $help->name ?? 'İsimsiz';
 
             $base64 = base64_encode($id . '?' . $helper_data->tel . '?' . Carbon::now()->timestamp);
-            $url = 'https://www.yardimyeri.com/case/' . $base64;
+            $url = 'https://www.yardimyeri.com/yardim?id=' . $base64;
             $formatted_number = preg_replace("/[^0-9]/", "", $helper_data->tel);
 
             $sms = new Netgsm();

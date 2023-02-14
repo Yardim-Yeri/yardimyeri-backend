@@ -54,8 +54,8 @@ class NewHelpNotificationJob implements ShouldQueue
         $formatted_number = preg_replace("/[^0-9]/", "", $phone_number);
         Log::alert($formatted_number .'_'. $this->help->id);
         
-        // $sms =  new Netgsm();
-        // $sms->send($formatted_number, 'yardimyeri.com\'dan oluşturduğunuz #'. $this->help->id.' numaralı yardım talebiniz başarıyla oluşturulmuştur. Yardım talebiniz onaylandığında size SMS ile bildirilecektir. Geçmiş olsun.');
+        $sms =  new Netgsm();
+        $sms->send($formatted_number, 'yardimyeri.com\'dan oluşturduğunuz #'. $this->help->id.' numaralı yardım talebiniz başarıyla oluşturulmuştur. Yardım talebiniz onaylandığında size SMS ile bildirilecektir. Geçmiş olsun.');
 
         // Twitter Service
 
