@@ -3,23 +3,25 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\District;
 use App\Models\HelpData;
+use App\Models\Province;
 use Illuminate\Http\Request;
 
 class DemandController extends Controller
 {
     public function index(Request $request)
     {
-        $data = HelpData::filter()->orderBy('created_at', 'DESC')->with('helper')->paginate(200);
+        $data = HelpData::filter()->orderBy('created_at', 'DESC')->with('helper')->paginate(50);
 
         $status = $request->status;
 
-        $provinces = \DB::table('sehir')->get();
-        $districts = \DB::table('ilce')->get();
-        $neighbourhoods = \DB::table('mahalle')->get();
-        $streets = \DB::table('sokak_cadde')->get();
+        $provinces = Province::get();
+        $districts = District::get();
+        // $neighbourhoods = \DB::table('mahalle')->get();
+        // $streets = \DB::table('sokak_cadde')->get();
 
-        return view('admin.demands', compact('data', 'status', 'provinces', 'districts', 'neighbourhoods', 'streets'));
+        return view('admin.demands', compact('data', 'status', 'provinces', 'districts'));
     }
 
     public function show($id)
