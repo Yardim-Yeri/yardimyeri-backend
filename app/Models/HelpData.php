@@ -65,6 +65,22 @@ class HelpData extends Model
             $q->where('sehir', mb_strtoupper(request()->input('sehir')));
         }
 
+        if (request()->filled('province')) {
+            $q->where('sehir', mb_strtoupper(request()->input('province')));
+        }
+
+        if (request()->filled('district')) {
+            $q->where('ilce_id', mb_strtoupper(request()->input('district')));
+        }
+
+        if (request()->filled('street')) {
+            $q->where('sokak_cadde_id', mb_strtoupper(request()->input('street')));
+        }
+
+        if (request()->filled('neighborhood')) {
+            $q->where('mahalle_id', mb_strtoupper(request()->input('neighborhood')));
+        }
+
         // status
         if (request()->filled('help_status')) {
             $q->where('help_status', request()->input('help_status'));
