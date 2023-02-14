@@ -2,23 +2,15 @@
 
 @section('admin-content')
     <div class="row">
-<<<<<<< Updated upstream
-        <div class="col-md-3">
-            <label for="">Yardım Durumu</label>
-            <select name="" id="help_status" class="form-select">
-=======
         <div class="col-md-2">
             <label for="">Yardım Durumu</label>
             <select class="form-select select2-input">
->>>>>>> Stashed changes
                 <option value="">Filtreyi Temizle</option>
                 <option {{ $status == 'Yardım Ulaştı' ? 'selected' : '' }}>Yardım Ulaştı</option>
                 <option {{ $status == 'Yardım Bekliyor' ? 'selected' : '' }}>Yardım Bekliyor</option>
                 <option {{ $status == 'Yardım Geliyor' ? 'selected' : '' }}>Yardım Geliyor</option>
             </select>
         </div>
-<<<<<<< Updated upstream
-=======
         <div class="col-md-2">
             <label for="">Şehir</label>
             <select class="form-select select2-input">
@@ -49,7 +41,6 @@
                 <option value="">Filtreyi Temizle</option>
             </select>
         </div>
->>>>>>> Stashed changes
     </div>
 
     <div class="mt-4">
@@ -107,6 +98,9 @@
                         <td>
                             {{ $item->helper?->email }}
                         </td>
+                        <td align="center">
+                            <input data-id="{{ $item->id }}" class="form-check-input approved-input" type="checkbox" {{ $item->approved == 1 ? 'checked' : '' }}>
+                        </td>
                         <td>
                             <a href="{{ route('show.admin-demand', $item->id) }}" class="btn btn-primary">Detaylar</a>
                         </td>
@@ -128,6 +122,11 @@
         // $('#help_status').change(function() {
         //     this.value == "" ? open(url, "_self") : open(url + "?status=" + this.value, "_self")
         // });
+
+        $('.approved-input').on('change', function() {
+            var url = "/admin/demands/update-approved-status/" + $(this).data('id');
+            $.get(url);
+        });
 
         var ajax_url = "{{ route('ajax.country-data-select2') }}";
 

@@ -21,11 +21,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/yardim-talebim-var', [PageController::class, 'yardimTalebimVar'])->name('yardim-talebim-var');
-Route::get('/yardimda-bulunabilirim/{id?}', [PageController::class, 'yardimdaBulunabilirim'])->name('yardimda-bulunabilirim');
-Route::get('yararli-linkler', [UsefulLinksController::class, 'index'])->name('yararli-linkler');
+// Route::get('/', [HomeController::class, 'index'])->name('home');
+// Route::get('/yardim-talebim-var', [PageController::class, 'yardimTalebimVar'])->name('yardim-talebim-var');
+// Route::get('/yardimda-bulunabilirim/{id?}', [PageController::class, 'yardimdaBulunabilirim'])->name('yardimda-bulunabilirim');
+// Route::get('yararli-linkler', [UsefulLinksController::class, 'index'])->name('yararli-linkler');
 
 Route::get('login', [AuthController::class, 'index'])->name('get.login');
 Route::post('login', [AuthController::class, 'login'])->name('post.login');
