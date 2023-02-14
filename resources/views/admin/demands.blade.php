@@ -100,7 +100,7 @@
                         </td>
                         <td align="center">
                             <input data-id="{{ $item->id }}" class="form-check-input approved-input" type="checkbox" {{ $item->approved == 1 ? 'checked' : '' }}>
-                            @if (auth()->user()->role == 0)
+                            @if (auth()->user()->role == 1)
                                 <form action="{{ route('delete.admin-demand', ['id' => $item->id]) }}" method="POST"
                                     class="delete-form">
                                     @csrf
