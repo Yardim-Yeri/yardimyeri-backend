@@ -100,6 +100,9 @@
                         </td>
                         <td align="center">
                             <input data-id="{{ $item->id }}" class="form-check-input approved-input" type="checkbox" {{ $item->approved == 1 ? 'checked' : '' }}>
+                        </td>
+                        <td>
+                            <a href="{{ route('show.admin-demand', $item->id) }}" class="btn btn-primary">Detaylar</a>
                             @if (auth()->user()->role == 1)
                                 <form action="{{ route('delete.admin-demand', ['id' => $item->id]) }}" method="POST"
                                     class="delete-form">
@@ -107,9 +110,6 @@
                                     <button type="submit" class="btn btn-danger">Sil</button>
                                 </form>
                             @endif
-                        </td>
-                        <td>
-                            <a href="{{ route('show.admin-demand', $item->id) }}" class="btn btn-primary">Detaylar</a>
                         </td>
                     </tr>
                 @endforeach
