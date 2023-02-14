@@ -39,8 +39,7 @@ class HelperNotificationJob implements ShouldQueue
 
         $base64 = base64_encode($helpId . '?' . $phone);
 
-        // $url = 'https://yardimyeri.com/yardim/' . $base64;
-        $url = 'https://yardimyeri-8qndep9la-poyrazovic-s-team.vercel.app/yardim?id=' . $base64;
+        $url = 'https://www.yardimyeri.com/yardim?id=' . $base64;
 
         $sms = new Netgsm();
         $sms->send($formatted_number, 'yardimyeri.com\'dan oluşturduğunuz yardım için teşekkür ederiz. Yardımı tamamlandığınızda aşağıdaki linke tıklayarak yardımı tamamladığınızı bildirebilirsiniz. ' . $url . ' Geçmiş olsun.');

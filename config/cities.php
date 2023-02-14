@@ -12,5 +12,6 @@ return [
         'Hatay',
         'Osmaniye',
         'Adana',
+        'Mersin'
     ]
 ];

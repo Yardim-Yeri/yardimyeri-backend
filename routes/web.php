@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AjaxController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DemandController;
 use App\Http\Controllers\Admin\LinkController;
@@ -20,11 +21,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/yardim-talebim-var', [PageController::class, 'yardimTalebimVar'])->name('yardim-talebim-var');
-Route::get('/yardimda-bulunabilirim/{id?}', [PageController::class, 'yardimdaBulunabilirim'])->name('yardimda-bulunabilirim');
-Route::get('yararli-linkler', [UsefulLinksController::class, 'index'])->name('yararli-linkler');
+// Route::get('/', [HomeController::class, 'index'])->name('home');
+// Route::get('/yardim-talebim-var', [PageController::class, 'yardimTalebimVar'])->name('yardim-talebim-var');
+// Route::get('/yardimda-bulunabilirim/{id?}', [PageController::class, 'yardimdaBulunabilirim'])->name('yardimda-bulunabilirim');
+// Route::get('yararli-linkler', [UsefulLinksController::class, 'index'])->name('yararli-linkler');
 
 Route::get('login', [AuthController::class, 'index'])->name('get.login');
 Route::post('login', [AuthController::class, 'login'])->name('post.login');
@@ -46,4 +46,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::post('useful-links', [LinkController::class, 'store'])->name('store.useful-links');
     Route::post('useful-links/update/{id}', [LinkController::class, 'update'])->name('update.useful-links');
     Route::get('useful-links/delete/{id}', [LinkController::class, 'delete'])->name('delete.useful-links');
+
+    Route::get('ajax-country-data', [AjaxController::class, 'select2'])->name('ajax.country-data-select2');
 });

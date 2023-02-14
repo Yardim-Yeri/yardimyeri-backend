@@ -17,10 +17,10 @@ class HelpDataResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'phone_number' => $this->tel,
+            'phone_number' => $request->filled('id') ? $this->tel : null,
             'need' => [
                 'type' => $this->ihtiyac_turu,
-                'detail' => $this->ihtiyac_turu_detail,
+                'detail' => $this->ihtiyac_turu_detayi,
             ],
             'how_many_person' => $this->kac_kisilik,
             'address' => $this->adres,

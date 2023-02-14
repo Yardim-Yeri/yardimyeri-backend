@@ -22,7 +22,7 @@ class HelperController extends Controller
 {
     public function getProvinces()
     {
-        $provinces = Province::paginate(25);
+        $provinces = Province::whereIn('sehir_title', config('cities.avaliable_cities'))->get();
 
         return $this->respondWithResourceCollection(
             ProvinceResource::collection($provinces)
