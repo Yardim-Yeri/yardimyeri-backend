@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AjaxController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DemandController;
 use App\Http\Controllers\Admin\LinkController;
@@ -46,4 +47,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::post('useful-links', [LinkController::class, 'store'])->name('store.useful-links');
     Route::post('useful-links/update/{id}', [LinkController::class, 'update'])->name('update.useful-links');
     Route::get('useful-links/delete/{id}', [LinkController::class, 'delete'])->name('delete.useful-links');
+
+    Route::get('ajax-country-data', [AjaxController::class, 'select2'])->name('ajax.country-data-select2');
 });
