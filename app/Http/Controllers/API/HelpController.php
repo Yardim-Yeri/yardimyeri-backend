@@ -55,13 +55,15 @@ class HelpController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         $help_data = HelpData::find($id);
 
         if (empty($help_data)) {
             return $this->respondNotFound('Yardım Talebi Bulunamadı');
         }
+
+        $request->merge(["iced" => true]);
 
         $resource = new HelpDataResource($help_data);
 
