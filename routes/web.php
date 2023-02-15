@@ -47,5 +47,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::post('useful-links/update/{id}', [LinkController::class, 'update'])->name('update.useful-links');
     Route::get('useful-links/delete/{id}', [LinkController::class, 'delete'])->name('delete.useful-links');
 
-    Route::get('ajax-country-data', [AjaxController::class, 'select2'])->name('ajax.country-data-select2');
+    Route::get('districts/{province_id}',[DemandController::class,'getDistricts'])->name('get.districts');
+    Route::get('neighborhood/{district_id}',[DemandController::class,'getNeighborhood'])->name('get.neighborhood');
+    Route::get('street/{neighborhood_id}',[DemandController::class,'getStreet'])->name('get.street');
+
+    
+
 });

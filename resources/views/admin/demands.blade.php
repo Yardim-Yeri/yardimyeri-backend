@@ -1,6 +1,9 @@
 @extends('admin.layouts.master')
-
+@section('css')
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+@endsection
 @section('admin-content')
+
     <div class="row">
         <div class="col-md-2">
             <label for="">Yardım Durumu</label>
@@ -11,39 +14,60 @@
                 <option {{ $status == 'Yardım Geliyor' ? 'selected' : '' }}>Yardım Geliyor</option>
             </select>
         </div>
-        <div class="col-md-2">
-            <label for="">Şehir</label>
-            <select class="form-select select2-input">
-                <option value="">Filtreyi Temizle</option>
-                @foreach ($provinces as $province)
-                    <option value="{{ $province->sehir_title }}">{{ $province->sehir_title }}</option>
-                @endforeach
-            </select>
-        </div>
-        <div class="col-md-2">
-            <label for="">İlçe</label>
-            <select class="form-select select2-input">
-                <option value="">Filtreyi Temizle</option>
-                @foreach ($districts as $district)
-                    <option value="{{ $district->ilce_sehirkey }}">{{ $district->ilce_title }}</option>
-                @endforeach
-            </select>
-        </div>
-        <div class="col-md-2">
-            <label for="">Mahalle</label>
-            <select class="form-select select2-input-ajax" data-type="mahalle">
-                <option value="">Filtreyi Temizle</option>
-            </select>
-        </div>
-        <div class="col-md-2">
-            <label for="">Sokak Cadde</label>
-            <select class="form-select select2-input-ajax" data-type="sokak_cadde">
-                <option value="">Filtreyi Temizle</option>
-            </select>
+
+        
+
+    </div>
+
+    <div class="card mt-4">
+        <div class="card-header">Konum Filtreleme</div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md">
+                    <label for="">Şehir</label>
+                    <select name="" id="select_city" class="form-select form-select-sm">
+                        <option value="">Filtreyi Temizle</option>
+                        @foreach ($cities as $city)
+                        <option value="{{ $city->sehir_key }}">{{ $city->sehir_title }}</option>
+                        @endforeach
+                    </select>
+                </div>
+        
+                <div class="col-md">
+                    <label for="">İlçe</label>
+                    <select name="" disabled  id="select_district" class="form-select select2">
+                        <option value="">Filtreyi Temizle</option>
+                    </select>
+                </div>
+        
+                <div class="col-md">
+                    <label for="">Mahalle</label>
+                    <select name="" disabled id="select_neighborhood" class="form-select select2">
+                        <option value="">Filtreyi Temizle</option>
+                    </select>
+                </div>
+        
+                <div class="col-md">
+                    <label for="">Sokak/Köy/Cadde</label>
+                    <select name="" disabled id="select_street" class="form-select select2">
+                        <option value="">Filtreyi Temizle</option>
+                    </select>
+                </div>
+
+                <div class="col-md mt-4">
+                    
+                    <button id="location_filter" class="btn btn-primary btn-sm col-12">Filtrele</button>
+                </div>
+            </div>
         </div>
     </div>
 
+  
+
+    
     <div class="mt-4">
+
+        <b>Toplam: </b>{{ $data->total() }} Kayıt {{ $data->onEachSide(1)->links() }}
         <table class="table table-sm table-striped table-hover table-bordered" id="datatable">
             <thead>
                 <tr>
@@ -118,65 +142,106 @@
             </tbody>
         </table>
 
-        {{ $data->links() }}
+        <b>Toplam: </b>{{ $data->total() }} Kayıt {{ $data->onEachSide(1)->links() }}
 
     </div>
+    
 @endsection
-
+@section('script')
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+@endsection
 @push('sc')
+
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
-        // var url = "{{ route('get.admin-demands') }}";
+        var url = "{{ route('get.admin-demands') }}";
 
-        // $('#help_status').change(function() {
-        //     this.value == "" ? open(url, "_self") : open(url + "?status=" + this.value, "_self")
-        // });
+        $('#help_status').change(function() {
+            this.value == "" ? open(url, "_self") : open(url + "?status=" + this.value, "_self")
+        });
 
         $('.approved-input').on('change', function() {
             var url = "/admin/demands/update-approved-status/" + $(this).data('id');
             $.get(url);
         });
 
-        var ajax_url = "{{ route('ajax.country-data-select2') }}";
+            $('#location_filter').click(function() {
+                var province= $('#select_city').val() ? '?province='+$('#select_city option:selected').text() : '';
+                var district= $('#select_district').val() ? '&district='+$('#select_district').val() : '';
+                var neighborhood= $('#select_neighborhood').val() ? '&neighborhood='+$('#select_neighborhood').val() : '';
+                var street= $('#select_street').val() ? '&street='+$('#select_street').val() : '';
 
-        $('.select2-input').select2({
-            theme: 'bootstrap-5'
-        });
-
-        $(element).on('select2:select', function(e) {
-            var value = e.params.data;
-
-            var url = new URL(window.location.href);
-            url.searchParams.get($(this).data('type')) ? url.searchParams.set($(this).data('type'), value.id) : url
-                .searchParams.append($(this).data('type'), value.id);
-            window.location.href = url.href;
-        });
-
-        $('.select2-input-ajax').each(function(_, element) {
-            $(element).select2({
-                theme: 'bootstrap-5',
-                ajax: {
-                    url: ajax_url,
-                    dataType: 'json',
-                    data: function(params) {
-                        var query = {
-                            term: params.term,
-                            type: $(this).data('type')
-                        }
-
-                        return query;
-                    }
-                },
+                var loc_url=url+province+district+neighborhood+street;
+                open(loc_url,"_self");
             });
 
-            $(element).on('select2:select', function(e) {
-                var value = e.params.data;
-
-                var url = new URL(window.location.href);
-                url.searchParams.get($(this).data('type')) ? url.searchParams.set($(this).data('type'),
-                    value.id) : url.searchParams.append($(this).data('type'), value.id);
-                window.location.href = url.href;
+            $('.delete-form').on('submit', function() {
+                if (confirm('Veri silinecek emin misiniz?')) {
+                    alert('Veri silindi');
+                }
             });
-        });
-    </script>
-@endpush
+
+            // $(element).on('select2:select', function(e) {
+            //     var value = e.params.data;
+
+            //     var url = new URL(window.location.href);
+            //     url.searchParams.get($(this).data('type')) ? url.searchParams.set($(this).data('type'),
+            //         value.id) : url.searchParams.append($(this).data('type'), value.id);
+            //     window.location.href = url.href;
+            // });
+
+
+            $('#select_city').change(function(){
+                $('#select_district').prop('disabled',false)
+                $("#select_district").select2({
+                    placeholder: "İlçeler getiriliyor",
+                    ajax: {
+                        url: "districts/"+this.value,
+                        delay: 200,
+                        dataType: 'json', 
+                        processResults: function(data) {  
+                            return {
+                                results: data
+                            };
+                        },
+                    },
+                })
+            })
+
+            $('#select_district').change(function(){
+                $('#select_neighborhood').prop('disabled',false)
+                $("#select_neighborhood").select2({
+                    placeholder: "Mahalleler getiriliyor",
+                    ajax: {
+                        url: "neighborhood/"+this.value,
+                        delay: 200,
+                        dataType: 'json', 
+                        processResults: function(data) {  
+                            return {
+                                results: data
+                            };
+                        },
+                    },
+                })
+            })
+
+            $('#select_neighborhood').change(function(){
+                $('#select_street').prop('disabled',false)
+                $("#select_street").select2({
+                    placeholder: "Sokaklar getiriliyor",
+                    ajax: {
+                        url: "street/"+this.value,
+                        delay: 200,
+                        dataType: 'json', 
+                        processResults: function(data) {  
+                            return {
+                                results: data
+                            };
+                        },
+                    },
+                })
+            })
+            
+            
+        </script>
+    @endpush
