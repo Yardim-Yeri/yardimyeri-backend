@@ -21,11 +21,13 @@ class HelpController extends Controller
         $order_column = (string) $request->input('order_column', 'created_at');
         $order_direction = (string) $request->input('order_direction', 'desc');
 
-        $collection = HelpData::filter()->orderBy($order_column, $order_direction)->paginate($limit);
+        $collection = HelpData::filter()->where('help_status', '!=', 'Yardım Ulaştı')->orderBy($order_column, $order_direction)->paginate($limit);
 
         $success_count = HelpData::where('help_status', '=', 'Yardım Ulaştı')->sum('kac_kisilik');
         $warning_count = HelpData::where('help_status', '=', 'Yardım Bekliyor')->sum('kac_kisilik');
         $info_count = HelpData::where('help_status', '=', 'Yardım Geliyor')->sum('kac_kisilik');
+
+        $request->merge(["iced" => true]);
 
         $resource = HelpDataResource::collection($collection)->additional([
             'success_help_count' => $success_count,

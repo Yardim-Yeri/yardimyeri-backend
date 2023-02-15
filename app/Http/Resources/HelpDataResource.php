@@ -16,7 +16,7 @@ class HelpDataResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->name,
+            'name' => $request->has('iced') ? (substr($this->name, 0, 2) . str_repeat('*', strlen($this->name) - 2)) : $this->name,
             'phone_number' => $request->filled('id') ? $this->tel : null,
             'need' => [
                 'type' => $this->ihtiyac_turu,
