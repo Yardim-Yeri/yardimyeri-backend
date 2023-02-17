@@ -2,13 +2,16 @@
 
 namespace App\Jobs;
 
+use App\Models\Tweet;
 use App\Services\Sms\Netgsm;
+use App\Services\TwitterService;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
 class HelperNotificationJob implements ShouldQueue
 {
@@ -43,5 +46,21 @@ class HelperNotificationJob implements ShouldQueue
 
         $sms = new Netgsm();
         $sms->send($formatted_number, 'yardimyeri.com\'dan oluşturduğunuz yardım için teşekkür ederiz. Yardımı tamamlandığınızda aşağıdaki linke tıklayarak yardımı tamamladığınızı bildirebilirsiniz. ' . $url . ' Geçmiş olsun.');
+
+        $tweet = Tweet::where('help_data_id', $helpId)->first();
+
+        try {
+            TwitterService::deleteTweet($tweet->tweet_id);
+
+            $tweet->update([
+                'status' => 0
+            ]);
+            Log::info('Tweet deleted'.$tweet->tweet_id.' for help id: '.$helpId);
+        } catch (\Throwable $th) {
+            Log::error('Tweet delete error: '.$th->getMessage().' for help id: '.$helpId);
+        }
+
+
+
     }
 }
