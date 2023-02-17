@@ -6,29 +6,33 @@ class EncrpytDecrypt
 {
     protected $ciphering = "AES-128-CTR";
 
-    protected $encryption_key = "YardimYeriEncrypted";
 
-    protected $iv = "5749278910190532";
 
     public function encrypt($string)
     {
+        $key = env('ENCRYPT_KEY');
+        $iv = env('ENCRYPT_IV');
+
         return openssl_encrypt(
             $string,
             $this->ciphering,
-            $this->encryption_key,
+            $key,
             0,
-            $this->iv
+            $iv
         );
     }
 
     public function decrpyt($string)
     {
+        $key = env('ENCRYPT_KEY');
+        $iv = env('ENCRYPT_IV');
+
         return openssl_decrypt(
             $string,
             $this->ciphering,
-            $this->encryption_key,
+            $key,
             0,
-            $this->iv
+            $iv
         );
     }
 }
