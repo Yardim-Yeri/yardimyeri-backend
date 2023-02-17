@@ -51,8 +51,8 @@ class DeleteOldHelps extends Command
             $base64 = base64_encode($encyrptedId);
             $messageArray = [
                 'yardimyeri.com\'dan oluşturduğunuz #'. $item->id.' numaralı yardım talebiniz',
-                ' 5 gün boyunca yanıtsız kaldığı için sistem tarafından silinmiştir.',
-                ' Yardım talebinizi tekrar oluşturmak için tıklayın',
+                ' 5 gün boyunca yanıtsız kaldığı için pasif hale getirilmiştir.',
+                ' Yardım talebinizi tekrar aktifleştirmek için tıklayın',
                 'https://api.yardimyeri.com/reactive/'.$base64
             ];
             $message = implode(' ', $messageArray);
