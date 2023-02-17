@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\Pages\UsefulLinksController;
+use App\Http\Controllers\ReactiveHelpRequestController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,6 +31,7 @@ Route::get('login', [AuthController::class, 'index'])->name('get.login');
 Route::post('login', [AuthController::class, 'login'])->name('post.login');
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
+
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('', function () {
         return redirect()->route('get.admin-demands');
@@ -51,6 +53,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('neighborhood/{district_id}',[DemandController::class,'getNeighborhood'])->name('get.neighborhood');
     Route::get('street/{neighborhood_id}',[DemandController::class,'getStreet'])->name('get.street');
 
-    
+
 
 });
+
+// Reactivate help request
+Route::get('reactive/{base64}', [ReactiveHelpRequestController::class, 'index'])->name('reactive-help-request');

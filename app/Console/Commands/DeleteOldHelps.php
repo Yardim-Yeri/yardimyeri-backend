@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\HelpData;
+use App\Models\SmsData;
 use App\Services\EncrpytDecrypt;
 use App\Services\Sms\Netgsm;
 use Carbon\Carbon;
@@ -32,24 +33,49 @@ class DeleteOldHelps extends Command
     public function handle()
     {
         $fiveDaysAgo = Carbon::now()->subDays(5);
-        
-        HelpData::where('created_at', '<=', $fiveDaysAgo)->where('help_status', 'Yardım Bekliyor')->where('approved', 0)->delete();
+
+        $records = HelpData::where('created_at', '<=', $fiveDaysAgo)->where('help_status', 'Yardım Bekliyor')->where('approved', 0)->get();
 
         $this->info('Delete successful');
 
-        // TODO
-        // $encrypter = new EncrpytDecrypt();
-        // $sms =  new Netgsm();
 
-        // foreach ($records as $item) {
-        //     TODO
-        //     $encrypter->encrypt($item->id);
-        //     $phone_number = $item->tel;
-        //     $formatted_number = preg_replace("/[^0-9]/", "", $phone_number);
-        //     $sms->send($formatted_number, 'yardimyeri.com\'dan oluşturduğunuz #'. $item->id.' numaralı yardım talebiniz başarıyla oluşturulmuştur. Yardım talebiniz onaylandığında size SMS ile bildirilecektir. Geçmiş olsun.');
 
-        //     $item->delete();
-        // }
+        $encrypter = new EncrpytDecrypt();
+        $sms =  new Netgsm();
+
+        foreach ($records as $item) {
+            $item->delete();
+            $encyrptedId = $encrypter->encrypt($item->id);
+            $phone_number = $item->tel;
+            $formatted_number = preg_replace("/[^0-9]/", "", $phone_number);
+            $base64 = base64_encode($encyrptedId);
+            $messageArray = [
+                'yardimyeri.com\'dan oluşturduğunuz #'. $item->id.' numaralı yardım talebiniz',
+                ' 5 gün boyunca yanıtsız kaldığı için sistem tarafından silinmiştir.',
+                ' Yardım talebinizi tekrar oluşturmak için tıklayın',
+                'https://api.yardimyeri.com/reactive/'.$base64
+            ];
+            $message = implode(' ', $messageArray);
+            try {
+                $response = $sms->send($formatted_number, $message);
+                SmsData::create([
+                    'phone_number' => $formatted_number,
+                    'message' => $message,
+                    'status' => 1,
+                    'data' => json_encode($response)
+
+                ]);
+            } catch (\Exception $e) {
+                $this->info($e->getMessage());
+
+                SmsData::create([
+                    'phone_number' => $formatted_number,
+                    'message' => $message,
+                    'status' => 0,
+                    'data' => $e->getMessage()
+                ]);
+            }
+        }
 
         return Command::SUCCESS;
     }
