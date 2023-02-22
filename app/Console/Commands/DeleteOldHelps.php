@@ -58,6 +58,7 @@ class DeleteOldHelps extends Command
             $message = implode(' ', $messageArray);
             try {
                 $response = $sms->send($formatted_number, $message);
+                dump($item->name);
                 SmsData::create([
                     'case_id' => $item->id,
                     'phone' => $formatted_number,
