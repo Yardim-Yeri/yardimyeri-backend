@@ -59,7 +59,8 @@ class DeleteOldHelps extends Command
             try {
                 $response = $sms->send($formatted_number, $message);
                 SmsData::create([
-                    'phone_number' => $formatted_number,
+                    'case_id' => $item->id,
+                    'phone' => $formatted_number,
                     'message' => $message,
                     'status' => 1,
                     'data' => json_encode($response)
@@ -69,7 +70,8 @@ class DeleteOldHelps extends Command
                 $this->info($e->getMessage());
 
                 SmsData::create([
-                    'phone_number' => $formatted_number,
+                    'case_id' => $item->id,
+                    'phone' => $formatted_number,
                     'message' => $message,
                     'status' => 0,
                     'data' => $e->getMessage()

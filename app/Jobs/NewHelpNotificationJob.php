@@ -64,7 +64,7 @@ class NewHelpNotificationJob implements ShouldQueue
             $response = $sms->send($formatted_number, $message);
             SmsData::create([
                 'case_id' => $this->help->id,
-                'phone_number' => $formatted_number,
+                'phone' => $formatted_number,
                 'message' => $message,
                 'status' => 1,
                 'data' => json_encode($response),
@@ -74,7 +74,7 @@ class NewHelpNotificationJob implements ShouldQueue
 
             SmsData::create([
                 'case_id' => $this->help->id,
-                'phone_number' => $formatted_number,
+                'phone' => $formatted_number,
                 'message' => $message,
                 'status' => 0,
                 'data' => json_encode($th),
