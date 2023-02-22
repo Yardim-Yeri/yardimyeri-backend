@@ -25,6 +25,6 @@ class ReactiveHelpRequestController extends Controller
         ]);
 
         Log::info('Reactive help request id: ' . $id);
-        return view('reactive-help-request');
+        return view('reactive_help_request');
     }
 }
