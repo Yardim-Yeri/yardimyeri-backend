@@ -2,6 +2,12 @@
 
 namespace App\Services;
 
+/**
+ * Class EncryptDecrypt
+ * @package App\Services
+ */
+
+
 class EncrpytDecrypt
 {
     protected $ciphering = "AES-128-CTR";
