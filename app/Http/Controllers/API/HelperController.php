@@ -71,7 +71,7 @@ class HelperController extends Controller
             $helper->help_data_id = $help_data->id;
             $helper->save();
 
-            $help_data->help_status = HelpStatusEnum::PROCESS;
+            $help_data->help_status = HelpStatusEnum::PROCESS->value;
             $help_data->save();
 
             HelperNotificationJob::dispatch($helper);
