@@ -35,7 +35,7 @@ class FixOldCases extends Command
 
         foreach ($helper_datas as $helper_data) {
             $help = $helper_data->help;
-            if ($help->help_status != HelpStatusEnum::PROCESS->value) {
+            if ($help->help_status != 'Yardım Geliyor') {
                 $this->info('Geçildi');
                 continue;
             }

@@ -27,7 +27,7 @@ class CaseController extends Controller
         $helperCheck = HelperData::where('help_data_id', $helpId)->where('tel', $helperPhone)->first();
 
         if ($helperCheck) {
-            $help_data = HelpData::where('id', $helpId)->where('help_status', HelpStatusEnum::PROCESS->value)->first();
+            $help_data = HelpData::where('id', $helpId)->where('help_status', 'Yardım Geliyor')->first();
 
             if (empty($help_data)) {
                 return $this->respondNotFound('Yardım Talebi Bulunamadı');
@@ -62,7 +62,7 @@ class CaseController extends Controller
                 return $this->respondNotFound('Yardım Talebi Bulunamadı');
             }
 
-            $help_data->help_status = HelpStatusEnum::SUCCESS->value;
+            $help_data->help_status = 'Yardım Ulaştı';;
             $help_data->save();
 
             return response()->json(['message' => 'Yardım Talebi Başarıyla Tamamlandı'], 200);
@@ -91,7 +91,7 @@ class CaseController extends Controller
                 return $this->respondNotFound('Yardım Talebi Bulunamadı');
             }
 
-            $help_data->help_status = HelpStatusEnum::PENDING->value;
+            $help_data->help_status = 'Yardım Bekliyor';
             $help_data->save();
 
             return response()->json(['message' => 'Yardım Talebi Başarıyla İptal Edildi'], 200);
